@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import firebase from 'firebase';
 
+import { CreateAccountPage } from '../create-account/create-account';
 /**
  * Generated class for the LoginPage page.
  *
@@ -23,12 +25,14 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
   doLogin() {
-    
+    console.log(this.account.email);
+    firebase.auth().signInWithEmailAndPassword(this.account.email, this.account.password)
+      .then(() => {
+        this.navCtrl.push(CreateAccountPage);
+        console.log("It worked")
+      }).catch((error) => {
+        console.log("Not working" + error);
+      });
   }
-
 }

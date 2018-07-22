@@ -19,8 +19,8 @@ export class LoginPage {
 
 
   account: { email: string, password: string } = {
-    email: '',
-    password: ''
+    email: 'test@test.com',
+    password: 'password'
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {

@@ -7,12 +7,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { CreateAccountPage } from '../pages/create-account/create-account';
-
+import { AddTransactionPage } from '../pages/add-transaction/add-transaction';
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
-    CreateAccountPage
+    CreateAccountPage,
+    AddTransactionPage
   ],
   imports: [
     BrowserModule,
@@ -22,7 +23,8 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
   entryComponents: [
     MyApp,
     LoginPage,
-    CreateAccountPage
+    CreateAccountPage,
+    AddTransactionPage
   ],
   providers: [
     StatusBar,

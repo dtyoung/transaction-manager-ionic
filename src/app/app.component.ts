@@ -6,11 +6,13 @@ import firebase from 'firebase';
 import { ENV } from '@app/env';
 
 import { LoginPage } from '../pages/login/login';
+import { AddTransactionPage } from '../pages/add-transaction/add-transaction';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LoginPage;
+  rootPage:any = AddTransactionPage;
   
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

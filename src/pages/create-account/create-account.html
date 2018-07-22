@@ -8,24 +8,30 @@
 
 
 <ion-content>
-  <form (submit)="registerAccount()">
+  <form [formGroup]="createAccountForm" (submit)="registerAccount()">
     <ion-list>
 
       <ion-item>
         <ion-label floating>Email</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+        <ion-input formControlName="email" type="email" [(ngModel)]="account.email" name="email"></ion-input>
       </ion-item>
 
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-      </ion-item>
       
 
       <ion-item>
-        <ion-label floating>Confirm Password</ion-label>
-        <ion-input type="password" [(ngModel)]="account.confirmPassword" name="confirm-password"></ion-input>
+        <ion-label floating>Password</ion-label>
+        <ion-input formControlName="password" type="password" [(ngModel)]="account.password" name="password"></ion-input>
       </ion-item>
+      
+      <p *ngIf="createAccountForm.controls.password.errors && createAccountForm.controls.password.errors.notLongEnough && createAccountForm.controls.password.dirty">Password not long enough<p>
+
+      <ion-item>
+        <ion-label floating>Confirm Password</ion-label>
+        <ion-input formControlName="confirmPassword" type="password" [(ngModel)]="account.confirmPassword" name="confirm-password"></ion-input>
+      </ion-item>
+
+      <p *ngIf="createAccountForm.controls.confirmPassword.errors && createAccountForm.controls.confirmPassword.errors.passwordsDontMatch && createAccountForm.controls.confirmPassword.dirty">Passwords do not match<p>
+
 
       <div padding>
         <button ion-button color="primary" block>Create Account</button>

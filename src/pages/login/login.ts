@@ -17,16 +17,18 @@ import { CreateAccountPage } from '../create-account/create-account';
 })
 export class LoginPage {
 
+
   account: { email: string, password: string } = {
     email: '',
     password: ''
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
   }
 
   doLogin() {
-    console.log(this.account.email);
+    console.log(this.account.email + " " + this.account.password);
     firebase.auth().signInWithEmailAndPassword(this.account.email, this.account.password)
       .then(() => {
         this.navCtrl.push(CreateAccountPage);

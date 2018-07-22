@@ -21,9 +21,9 @@
         <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
       </ion-item>
       
-      <div>
-        <p>Don't have an account? Click here to create one.</p>
-      </div>  
+      <ion-item>
+        <p>Don't have an account? Click <a (click)="goToCreateAccountPage()">here</a> to create one.</p>
+      </ion-item>  
 
       <div padding>
         <button ion-button color="primary" block>Login</button>

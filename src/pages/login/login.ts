@@ -28,13 +28,15 @@ export class LoginPage {
   }
 
   doLogin() {
-    console.log(this.account.email + " " + this.account.password);
     firebase.auth().signInWithEmailAndPassword(this.account.email, this.account.password)
       .then(() => {
         this.navCtrl.push(CreateAccountPage);
-        console.log("It worked")
       }).catch((error) => {
         console.log("Not working" + error);
       });
+  }
+
+  goToCreateAccountPage() {
+    this.navCtrl.push(CreateAccountPage);
   }
 }

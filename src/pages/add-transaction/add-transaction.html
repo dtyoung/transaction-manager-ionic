@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>add-transaction</ion-title>
+    <ion-title>Add Transaction</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,7 +19,7 @@
     <ion-item>
       <!-- cost -->
       <ion-icon name="logo-usd" item-start></ion-icon>
-      <ion-input type="number"></ion-input>
+      <ion-input type="number" placeholder="0.00"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -31,7 +31,7 @@
     <ion-item>
       <!-- date -->
       <ion-icon name="md-calendar" item-start></ion-icon>
-      Date
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="myDate" placeholder="DD/MM/YYYY"></ion-datetime>
     </ion-item>
 
     <ion-item>

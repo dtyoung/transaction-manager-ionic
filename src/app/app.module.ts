@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { AddTransactionPage } from '../pages/add-transaction/add-transaction';
+
 @NgModule({
   declarations: [
     MyApp,

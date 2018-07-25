@@ -1,0 +1,31 @@
+{
+
+  "categories": {
+    "rent": {
+      "name": "Rent",
+      "icon": ""
+    },
+    "groceries": {
+      "name": "Groceries",
+      "icon": ""
+    },
+    "power": {
+      "name": "Power",
+      "icon": ""
+    },
+    "wifi": {
+      "name": "Wifi",
+      "icon": ""
+    },
+    "entertainment": {
+      "name": "Entertainment",
+      "icon": ""
+    },
+    "transportation": {
+      "name": "Transportation",
+      "icon": ""
+    }
+  }
+
+  
+}

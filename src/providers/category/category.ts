@@ -23,16 +23,8 @@ export class CategoryProvider {
     if(this.categories) {
       return Observable.of(this.categories);
     } else {
-      return this.http.get('assests/data/categories.json')
+      return this.http.get('assets/data/categories.json')
       .map(res => res.json())
-      .subscribe(data => {
-        console.log(data);
-      }
     }
   }
-
-  processCategories(categories: any) {
-    this.categories = categories.json;
-  }
-
 }

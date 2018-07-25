@@ -17,26 +17,20 @@ import { CategoryProvider } from '../../providers/category/category';
 })
 export class SelectCategoryPage {
 
-  categories: string[];
+  categories: string[] = [];
   database: firebase.database.Database
   test: any;
+  testData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider) {
-    // this.database = firebase.database();
-    this.test = this.categoryService.load();
-    console.log(this.test);
-    // this.test = firebase.database().ref('/defaultCategories').once('value')
-    //   .then((snapshot) => {console.log(snapshot.val())})
-    //   .catch((error) => console.log(error))
-    // this.categories = [
-    //   'Rent',
-    //   'Groceries',
-    //   'Power',
-    //   'Wifi'
-    // ]
-  
+    this.categoryService.load().subscribe(data => {
+      for(const category of Object.keys(data)) {
+        this.categories.push(data[category].name)
+      }
+    });  
   }
 
-  
-
+  selectCategory(category: any) {
+    
+  }
 }

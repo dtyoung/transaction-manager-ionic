@@ -18,9 +18,6 @@ import { CategoryProvider } from '../../providers/category/category';
 export class SelectCategoryPage {
 
   categories: string[] = [];
-  database: firebase.database.Database
-  test: any;
-  testData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider) {
     this.categoryService.load().subscribe(data => {
@@ -31,6 +28,7 @@ export class SelectCategoryPage {
   }
 
   selectCategory(category: any) {
-    
+    this.navCtrl.getPrevious().data.category = category;
+    this.navCtrl.pop();
   }
 }

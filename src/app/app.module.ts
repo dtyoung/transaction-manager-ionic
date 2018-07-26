@@ -11,6 +11,7 @@ import { CreateAccountPage } from '../pages/create-account/create-account';
 import { AddTransactionPage } from '../pages/add-transaction/add-transaction';
 import { SelectCategoryPage } from '../pages/select-category/select-category';
 import { CategoryProvider } from '../providers/category/category';
+import { TransactionProvider } from '../providers/transaction/transaction';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CategoryProvider } from '../providers/category/category';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoryProvider,
+    TransactionProvider,
   ]
 })
 export class AppModule {}

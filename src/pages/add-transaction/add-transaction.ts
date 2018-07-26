@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SelectCategoryPage } from '../../pages/select-category/select-category'
+import { TransactionProvider } from '../../providers/transaction/transaction';
 /**
  * Generated class for the AddTransactionPage page.
  *
@@ -20,11 +21,7 @@ export class AddTransactionPage {
   date: String = new Date().toISOString().substring(0, 10);
   notes: String = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddTransactionPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams, public transactions: TransactionProvider) {
   }
 
   ionViewWillEnter() {
@@ -44,9 +41,6 @@ export class AddTransactionPage {
   }
 
   submitTransaction() {
-    console.log('date', this.date);
-    console.log('value', this.value);
-    console.log('category', this.category);
-    console.log('notes', this.notes);
+    this.transactions.addTransaction(this.value, this.category.name, this.date, this.notes)
   }
 }

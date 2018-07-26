@@ -24,7 +24,6 @@ export class SelectCategoryPage {
       for(const category of Object.keys(data)) {
         this.categories.push(data[category])
       }
-      console.log(this.categories);
     });  
   }
 

@@ -17,17 +17,18 @@ import { CategoryProvider } from '../../providers/category/category';
 })
 export class SelectCategoryPage {
 
-  categories: string[] = [];
+  categories: Object[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider) {
     this.categoryService.load().subscribe(data => {
       for(const category of Object.keys(data)) {
-        this.categories.push(data[category].name)
+        this.categories.push(data[category])
       }
+      console.log(this.categories);
     });  
   }
 
-  selectCategory(category: any) {
+  selectCategory(category: Object[]) {
     this.navCtrl.getPrevious().data.category = category;
     this.navCtrl.pop();
   }

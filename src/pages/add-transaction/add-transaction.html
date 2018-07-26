@@ -19,29 +19,29 @@
     <ion-item>
       <!-- cost -->
       <ion-icon name="logo-usd" item-start></ion-icon>
-      <ion-input type="number" placeholder="0.00"></ion-input>
+      <ion-input type="number" placeholder="0.00" [(ngModel)]="value"></ion-input>
     </ion-item>
 
     <ion-item>
       <!-- category -->
-      <ion-icon name="md-help" item-start></ion-icon>
+      <ion-icon name="{{getCategoryIcon()}}" item-start></ion-icon>
       <ion-label (click)="selectCategory()" >{{getCategoryText()}}</ion-label>
     </ion-item>
 
     <ion-item>
       <!-- date -->
       <ion-icon name="md-calendar" item-start></ion-icon>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="myDate" placeholder="DD/MM/YYYY"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="date" placeholder="DD/MM/YYYY"></ion-datetime>
     </ion-item>
 
     <ion-item>
       <!-- notes -->
       <ion-icon name="md-clipboard" item-start></ion-icon>
-      <ion-input type="text" placeholder="notes"></ion-input>
+      <ion-input type="text" placeholder="notes" [(ngModel)]="notes"></ion-input>
     </ion-item>
 
     <ion-item>
-      <button ion-button color="primary" block>
+      <button ion-button color="primary" block (click)="submitTransaction()">
         Add Transaction
       </button>
     </ion-item>

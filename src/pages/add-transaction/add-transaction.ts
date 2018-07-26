@@ -15,8 +15,10 @@ import { SelectCategoryPage } from '../../pages/select-category/select-category'
 })
 export class AddTransactionPage {
 
-  category: String = null;
-
+  category: { name: String, icon: String } = null;
+  value: Number = 0.00;
+  date: String = new Date().toISOString().substring(0, 10);
+  notes: String = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -34,6 +36,17 @@ export class AddTransactionPage {
   }
 
   getCategoryText(): String {
-    return this.category ? this.category : 'Select Category'
+    return this.category ? this.category.name : 'Select Category';
+  }
+
+  getCategoryIcon(): String {
+    return this.category ? this.category.icon : 'md-help';
+  }
+
+  submitTransaction() {
+    console.log('date', this.date);
+    console.log('value', this.value);
+    console.log('category', this.category);
+    console.log('notes', this.notes);
   }
 }

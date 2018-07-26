@@ -1,26 +1,26 @@
 {
   "rent": {
     "name": "Rent",
-    "icon": ""
+    "icon": "md-home"
   },
   "groceries": {
     "name": "Groceries",
-    "icon": ""
+    "icon": "ios-basket"
   },
   "power": {
     "name": "Power",
-    "icon": ""
+    "icon": "md-flash"
   },
   "wifi": {
     "name": "Wifi",
-    "icon": ""
+    "icon": "ios-wifi"
   },
   "entertainment": {
     "name": "Entertainment",
-    "icon": ""
+    "icon": "md-game-controller-b"
   },
   "transportation": {
     "name": "Transportation",
-    "icon": ""
+    "icon": "md-bus"
   }  
 }

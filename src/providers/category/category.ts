@@ -20,11 +20,11 @@ export class CategoryProvider {
   }
 
   load(): any {
-    if(this.categories) {
-      return Observable.of(this.categories);
-    } else {
-      return this.http.get('assets/data/categories.json')
-      .map(res => res.json())
-    }
+    return this.http.get('assets/data/categories.json')
+    .map(res => res.json());    
+  }
+
+  getDefaultCategoryName(): String {
+    return "No Category";
   }
 }

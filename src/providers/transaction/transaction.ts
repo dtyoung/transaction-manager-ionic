@@ -17,10 +17,8 @@ export class TransactionProvider {
 
   addTransaction(value: Number, category: String, date: String, notes: String){
     const database = firebase.database();
-    database.ref('/users' + '111').set({
-      date, category, value, notes 
+    database.ref('/user/transactions').push({
+      value, category, date, notes
     });
   }
-
-
 }

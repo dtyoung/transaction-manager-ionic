@@ -1,4 +1,8 @@
 {
+  "no category": {
+    "name": "No Category",
+    "icon": "md-help"
+  },
   "rent": {
     "name": "Rent",
     "icon": "md-home"

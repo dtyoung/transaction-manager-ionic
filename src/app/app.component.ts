@@ -8,12 +8,14 @@ import { ENV } from '@app/env';
 import { LoginPage } from '../pages/login/login';
 import { AddTransactionPage } from '../pages/add-transaction/add-transaction';
 import { SelectCategoryPage } from '../pages/select-category/select-category';
+import { AddCategoryPage } from '../pages/add-category/add-category';
+import { SelectIconPage } from '../pages/select-icon/select-icon';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = AddTransactionPage;
+  rootPage:any = AddCategoryPage;
   
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

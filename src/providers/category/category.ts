@@ -19,12 +19,17 @@ export class CategoryProvider {
     
   }
 
-  load(): any {
+  loadCategories(): any {
     return this.http.get('assets/data/categories.json')
     .map(res => res.json());    
   }
 
   getDefaultCategoryName(): String {
     return "No Category";
+  }
+
+  loadIcons(): any {
+    return this.http.get('assets/data/icons.json')
+    .map(res => res.json());
   }
 }

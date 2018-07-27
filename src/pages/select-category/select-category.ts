@@ -20,7 +20,7 @@ export class SelectCategoryPage {
   categories: Object[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider) {
-    this.categoryService.load().subscribe(data => {
+    this.categoryService.loadCategories().subscribe(data => {
       for(const category of Object.keys(data)) {
         this.categories.push(data[category])
       }

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SelectCategoryPage } from '../../pages/select-category/select-category'
-import { TransactionProvider } from '../../providers/transaction/transaction';
-import { CategoryProvider } from '../../providers/category/category';
+
+import { SelectCategoryPage } from '../../pages';
+import { CategoryProvider, TransactionProvider } from '../../providers';
 /**
  * Generated class for the AddTransactionPage page.
  *

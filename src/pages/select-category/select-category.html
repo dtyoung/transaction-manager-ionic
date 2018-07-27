@@ -16,7 +16,6 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let category of categories" (click)="selectCategory(category)">
-      <!-- <ion-icon name={{category.icon}}></ion-icon> -->
       <ion-icon name={{category.icon}} item-start></ion-icon>
       {{category.name}}
     </ion-item>

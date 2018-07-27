@@ -3,8 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import firebase from 'firebase';
 
-import { ConfirmPasswordValidator } from '../../validators/confirmPassword'
-import { PasswordValidator } from '../../validators/password';
+import { ConfirmPasswordValidator, PasswordValidator } from '../../validators';
 /**
  * Generated class for the CreateAccountPage page.
  *

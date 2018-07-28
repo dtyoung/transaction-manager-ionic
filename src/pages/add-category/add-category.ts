@@ -33,10 +33,7 @@ export class AddCategoryPage {
   addCategory() {
     console.log('Clicked addCategory()');
     console.log('Name:', this.name)
-    this.categoryService.addCategory({ 
-      name: this.name,
-      icon: this.icon
-    })
+    this.categoryService.addCategory(this.name, this.icon)
   }
 
 }

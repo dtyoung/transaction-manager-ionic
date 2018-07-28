@@ -15,7 +15,7 @@ import { SelectIconPage } from '../pages/select-icon/select-icon';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = AddCategoryPage;
+  rootPage:any = AddTransactionPage;
   
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

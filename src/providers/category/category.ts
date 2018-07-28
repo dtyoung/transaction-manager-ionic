@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+
+import firebase from 'firebase';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 /*
@@ -18,8 +20,17 @@ export class CategoryProvider {
   }
 
   loadCategories(): any {
-    return this.http.get('assets/data/categories.json')
-    .map(res => res.json());    
+    // return this.http.get('assets/data/categories.json')
+    // .map(res => res.json());
+    const database = firebase.database();
+    return database.ref('user/categories').once('value')
+
+    if(this.categories) {
+      return this.categories;
+    } else {
+      const database = firebase.database();
+      return database.ref('user/categories').once('value')
+    }
   }
 
   getDefaultCategoryName(): String {
@@ -35,8 +46,10 @@ export class CategoryProvider {
     .map(res => res.json());
   }
 
-  addCategory(category: { name: String, icon: String }) {
-    this.http.post('assets/data/categories.json', category)
-    .subscribe(data => console.log(data));
+  addCategory(name: String, icon: String){
+    const database = firebase.database();
+    database.ref('/user/categories').push({
+      name, icon
+    });
   }
 }

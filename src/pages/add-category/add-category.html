@@ -16,7 +16,7 @@
 <ion-content class="icontent" padding>
   <ion-list class="ilist">
     <ion-item>
-      <ion-icon name="md-help" item-start (click)="selectCategoryIcon()"></ion-icon>
+      <ion-icon name={{icon}} item-start (click)="selectCategoryIcon()"></ion-icon>
       <ion-input type="text" placeholder="Category Name" [(ngModel)]="name"></ion-input>
     </ion-item>
 

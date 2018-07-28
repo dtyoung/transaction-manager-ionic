@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 /*
@@ -28,8 +26,17 @@ export class CategoryProvider {
     return "No Category";
   }
 
+  getDefaultIcon(): String {
+    return "md-help";
+  }
+
   loadIcons(): any {
     return this.http.get('assets/data/icons.json')
     .map(res => res.json());
+  }
+
+  addCategory(category: { name: String, icon: String }) {
+    this.http.post('assets/data/categories.json', category)
+    .subscribe(data => console.log(data));
   }
 }

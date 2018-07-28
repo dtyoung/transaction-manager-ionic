@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SelectIconPage } from '../../pages'
+import { CategoryProvider } from '../../providers';
 /**
  * Generated class for the AddCategoryPage page.
  *
@@ -16,21 +17,26 @@ import { SelectIconPage } from '../../pages'
 export class AddCategoryPage {
 
   name: String;
+  icon: String;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddCategoryPage');
+  ionViewWillEnter() {
+    this.icon = this.navParams.get('icon') ? this.navParams.get('icon') : this.categoryService.getDefaultIcon();
   }
 
   selectCategoryIcon() {
-    this.navCtrl.push(SelectIconPage, { "parentPage": this });
+    this.navCtrl.push(SelectIconPage);
   }
 
   addCategory() {
     console.log('Clicked addCategory()');
     console.log('Name:', this.name)
+    this.categoryService.addCategory({ 
+      name: this.name,
+      icon: this.icon
+    })
   }
 
 }

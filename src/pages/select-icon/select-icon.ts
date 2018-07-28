@@ -31,6 +31,9 @@ export class SelectIconPage {
     console.log('ionViewDidLoad SelectIconPage');
   }
 
-  
+  selectIcon(icon: String){
+    this.navCtrl.getPrevious().data.icon = icon;
+    this.navCtrl.pop();
+  }
 
 }

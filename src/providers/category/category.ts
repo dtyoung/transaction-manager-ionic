@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import firebase from 'firebase';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
+import { Observable } from 'rxjs/Observable';
 /*
   Generated class for the CategoryProvider provider.
 
@@ -13,24 +14,36 @@ import 'rxjs/add/observable/of';
 @Injectable()
 export class CategoryProvider {
 
-  categories: any;
+  categories: Object;
 
   constructor(public http: Http) {
     
   }
 
   loadCategories(): any {
-    // return this.http.get('assets/data/categories.json')
-    // .map(res => res.json());
-    const database = firebase.database();
-    return database.ref('user/categories').once('value')
 
     if(this.categories) {
-      return this.categories;
+      return new Promise((resolve, reject) => {
+        resolve(this.categories);
+      });
     } else {
-      const database = firebase.database();
-      return database.ref('user/categories').once('value')
+      return new Promise((resolve, reject) => {
+        firebase.database().ref('user/categories').once('value')
+          .then(snapshot => {
+            this.categories = snapshot.val()
+            resolve(this.categories);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
     }
+  }
+
+  private async readCategories() {
+    const snapshot = await firebase.database().ref('user/categories').once('value');
+    console.log('2', snapshot.val())
+    return snapshot.val();
   }
 
   getDefaultCategoryName(): String {

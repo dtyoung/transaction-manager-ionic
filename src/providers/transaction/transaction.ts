@@ -1,6 +1,8 @@
 
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 /*
   Generated class for the TransactionProvider provider.
@@ -11,12 +13,15 @@ import firebase from 'firebase';
 @Injectable()
 export class TransactionProvider {
 
-  private transactions: Object = {};
-  private updatedSinceLastRead: Boolean = false;
+  private transactions: Object[][];
+  private transactionsObservable: Observable<Object[][]>;
+  private transactionsObserver;
 
   constructor() {
-    console.log('Hello TransactionProvider Provider');
-    this.loadTransactions();
+    this.transactionsObservable = Observable.create(observer => {
+      this.transactionsObserver = observer;
+    })
+    this.loadTransactionsByDate();
   }
 
   addTransaction(value: Number, category: String, date: String, notes: String){
@@ -26,20 +31,33 @@ export class TransactionProvider {
     });
   }
 
-  getTransactions(): Object {
-    this.updatedSinceLastRead = false;
-    return this.transactions;
+  transactionUpdatesByDate(): Observable<Object[][]> {
+    // this.updatedSinceLastRead = false;
+
+    return this.transactionsObservable;
+    // return this.transactions;
   }
 
-  hasBeenUpdated(): Boolean {
-    return this.updatedSinceLastRead;
-  }
+  private loadTransactionsByDate() {
+    firebase.database().ref('/user/transactions').orderByChild('date').on('value', (snapshot => {
+      const tempTransactions = [];
 
-  private loadTransactions() {
-    firebase.database().ref('/user/transactions').on("value", (snapshot => {
-      this.transactions = snapshot.val();
-      this.updatedSinceLastRead = true;
-    }))
+      var prevDate = "";
+      snapshot.forEach(childSnapshot => {
+        var key = childSnapshot.key;
+        var childData = childSnapshot.val();
+        const transaction = { key: childData }
+
+        if(childData.date !== prevDate) {
+          prevDate = childData.date;
+          tempTransactions.unshift([]);
+        }
+        tempTransactions[0].unshift(transaction);
+      });
+      this.transactions = tempTransactions;
+      console.log(this.transactions);
+      this.transactionsObserver.next(this.transactions)
+    }));
   }
 
 }

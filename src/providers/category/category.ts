@@ -17,7 +17,7 @@ export class CategoryProvider {
   categories: Object;
 
   constructor(public http: Http) {
-    
+    console.log('category initialized');
   }
 
   loadCategories(): any {

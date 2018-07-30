@@ -12,11 +12,12 @@ import { AddCategoryPage } from '../pages/add-category/add-category';
 import { SelectIconPage } from '../pages/select-icon/select-icon';
 import { ViewTransactionsPage } from '../pages/view-transactions/view-transactions';
 
+import { TransactionProvider } from '../providers/transaction/transaction';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = ViewTransactionsPage;
+  rootPage:any = LoginPage;
   
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

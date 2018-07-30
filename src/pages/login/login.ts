@@ -4,6 +4,7 @@ import firebase from 'firebase';
 
 import { CreateAccountPage } from '../create-account/create-account';
 import { AddTransactionPage } from '../add-transaction/add-transaction';
+import { ViewTransactionsPage } from '../view-transactions/view-transactions';
 /**
  * Generated class for the LoginPage page.
  *
@@ -31,7 +32,7 @@ export class LoginPage {
   doLogin() {
     firebase.auth().signInWithEmailAndPassword(this.account.email, this.account.password)
       .then(() => {
-        this.navCtrl.push(AddTransactionPage);
+        this.navCtrl.push(ViewTransactionsPage);
       }).catch((error) => {
         console.log("Not working" + error);
       });

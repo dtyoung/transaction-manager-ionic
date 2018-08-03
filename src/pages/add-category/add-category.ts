@@ -23,7 +23,7 @@ export class AddCategoryPage {
   }
 
   ionViewWillEnter() {
-    this.icon = this.navParams.get('icon') ? this.navParams.get('icon') : this.categoryService.getDefaultIcon();
+    this.icon = this.navParams.get('icon') ? this.navParams.get('icon') : this.categoryService.getDefaultCategoryIcon();
   }
 
   selectCategoryIcon() {

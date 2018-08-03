@@ -22,7 +22,7 @@ export class CategoryProvider {
 
   loadCategories(): any {
 
-    if(this.categories) {
+    if (this.categories) {
       return new Promise((resolve, reject) => {
         resolve(this.categories);
       });
@@ -50,16 +50,16 @@ export class CategoryProvider {
     return "No Category";
   }
 
-  getDefaultIcon(): String {
+  getDefaultCategoryIcon(): String {
     return "md-help";
   }
 
   loadIcons(): any {
     return this.http.get('assets/data/icons.json')
-    .map(res => res.json());
+      .map(res => res.json());
   }
 
-  addCategory(name: String, icon: String){
+  addCategory(name: String, icon: String) {
     const database = firebase.database();
     database.ref('/user/categories').push({
       name, icon

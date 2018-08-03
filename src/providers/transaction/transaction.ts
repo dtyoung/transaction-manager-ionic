@@ -20,14 +20,15 @@ export class TransactionProvider {
   constructor() {
     this.transactionsObservable = Observable.create(observer => {
       this.transactionsObserver = observer;
+      this.loadTransactionsByDate();
     })
-    this.loadTransactionsByDate();
+
   }
 
-  addTransaction(value: Number, category: String, date: String, notes: String){
+  addTransaction(value: Number, category: String, date: String, notes: String, icon: String) {
     const database = firebase.database();
     database.ref('/user/transactions').push({
-      value, category, date, notes
+      value, category, date, notes, icon
     });
   }
 
@@ -48,7 +49,7 @@ export class TransactionProvider {
         var childData = childSnapshot.val();
         const transaction = { key: childData }
 
-        if(childData.date !== prevDate) {
+        if (childData.date !== prevDate) {
           prevDate = childData.date;
           tempTransactions.unshift([]);
         }

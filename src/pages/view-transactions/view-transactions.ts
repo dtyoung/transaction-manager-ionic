@@ -17,15 +17,16 @@ import { TransactionProvider } from '../../providers/transaction/transaction';
 export class ViewTransactionsPage {
 
   transactions: Object[][] = [];
-
+  date = [1,2,3]
   constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ViewTransactionsPage');
     this.transactionService.transactionUpdatesByDate().subscribe(data => this.transactions = data);
-
+    console.log('transactions', this.transactions)
   }
+
 
 
 }

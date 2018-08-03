@@ -11,14 +11,15 @@ import {
   TransactionProvider
 } from '../providers';
 
-import { 
+import {
   AddCategoryPage,
   AddTransactionPage,
   CreateAccountPage,
   LoginPage,
   SelectCategoryPage,
   SelectIconPage,
-  ViewTransactionsPage
+  ViewTransactionsPage,
+  TransactionDetailPage
 } from '../pages';
 
 @NgModule({
@@ -30,7 +31,8 @@ import {
     SelectCategoryPage,
     AddCategoryPage,
     SelectIconPage,
-    ViewTransactionsPage
+    ViewTransactionsPage,
+    TransactionDetailPage
   ],
   imports: [
     BrowserModule,
@@ -46,14 +48,15 @@ import {
     SelectCategoryPage,
     AddCategoryPage,
     SelectIconPage,
-    ViewTransactionsPage
+    ViewTransactionsPage,
+    TransactionDetailPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     CategoryProvider,
     TransactionProvider,
   ]
 })
-export class AppModule {}
+export class AppModule { }

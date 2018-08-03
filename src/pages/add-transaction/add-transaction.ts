@@ -21,7 +21,6 @@ export class AddTransactionPage {
   value: Number = 0.00;
   date: String = new Date().toISOString().substring(0, 10);
   notes: String = '';
-  icon: String = 'md-help';
 
   constructor(
     public navCtrl: NavController,
@@ -32,7 +31,6 @@ export class AddTransactionPage {
 
   ionViewWillEnter() {
     this.category = this.navParams.get('category') || null;
-    this.icon = this.navParams.get('category-icon') || null;
   }
 
   selectCategory() {
@@ -51,5 +49,6 @@ export class AddTransactionPage {
     const categoryName = this.category ? this.category.name : this.categories.getDefaultCategoryName();
     const icon = this.category ? this.category.icon : this.categories.getDefaultCategoryIcon();
     this.transactions.addTransaction(this.value, categoryName, this.date, this.notes, icon)
+    this.navCtrl.pop();
   }
 }

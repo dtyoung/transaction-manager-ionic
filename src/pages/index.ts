@@ -5,3 +5,4 @@ export { LoginPage } from '../pages/login/login';
 export { SelectCategoryPage } from '../pages/select-category/select-category';
 export { SelectIconPage } from '../pages/select-icon/select-icon';
 export { ViewTransactionsPage } from '../pages/view-transactions/view-transactions';
+export { TransactionDetailPage } from '../pages/transaction-detail/transaction-detail';

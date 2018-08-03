@@ -1,0 +1,41 @@
+<!--
+  Generated template for the TransactionDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Transaction</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <!-- cost -->
+      <ion-icon name="logo-usd" item-start></ion-icon>
+      <ion-label>{{getValue()}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      category
+      <ion-icon name="{{getCategoryIcon()}}" item-start></ion-icon>
+      <ion-label>{{getCategoryText()}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="md-calendar" item-start></ion-icon>
+      <ion-label>{{getDate()}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="md-clipboard" item-start></ion-icon>
+      <ion-label>{{getNotes()}}</ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

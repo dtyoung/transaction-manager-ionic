@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TransactionProvider } from '../../providers/transaction/transaction';
+import { AddTransactionPage, TransactionDetailPage } from '../../pages';
 
 /**
  * Generated class for the ViewTransactionsPage page.
@@ -17,16 +18,19 @@ import { TransactionProvider } from '../../providers/transaction/transaction';
 export class ViewTransactionsPage {
 
   transactions: Object[][] = [];
-  date = [1,2,3]
   constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ViewTransactionsPage');
     this.transactionService.transactionUpdatesByDate().subscribe(data => this.transactions = data);
-    console.log('transactions', this.transactions)
   }
 
+  addTransaction() {
+    this.navCtrl.push(AddTransactionPage);
+  }
 
-
+  moreDetailTransaction(transaction: Object) {
+    console.log('first', transaction)
+    this.navCtrl.push(TransactionDetailPage, { transaction })
+  }
 }

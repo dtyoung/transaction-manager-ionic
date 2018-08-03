@@ -14,13 +14,17 @@
 
 
 <ion-content padding>
+
+  <ion-fab bottom center>
+    <button ion-fab (click)="addTransaction()">+</button>
+  </ion-fab>
   <ion-card *ngFor="let date of transactions">
     <ion-card-header>
       {{date[0].key.date}}
     </ion-card-header>
 
     <ion-list>
-      <ion-item *ngFor="let transaction of date">
+      <ion-item *ngFor="let transaction of date" (click)="moreDetailTransaction(transaction.key)">
         <ion-row>
           <ion-col col-1>
             <ion-icon name={{transaction.key.icon}}></ion-icon>

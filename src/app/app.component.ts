@@ -17,7 +17,7 @@ import { TransactionProvider } from '../providers/transaction/transaction';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = ViewTransactionsPage;
+  rootPage: any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

@@ -14,36 +14,60 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class CategoryProvider {
 
-  categories: Object;
+  private categories: Object[];
+  private categoriesObservable: Observable<Object[]>;
+  private categoriesObserver;
 
   constructor(public http: Http) {
-    console.log('category initialized');
+    this.categoriesObservable = Observable.create(observer => {
+      this.categoriesObserver = observer;
+      this.loadCategories();
+    })
   }
 
-  loadCategories(): any {
+  getCategories(): Observable<Object[]> {
 
-    if (this.categories) {
-      return new Promise((resolve, reject) => {
-        resolve(this.categories);
-      });
-    } else {
-      return new Promise((resolve, reject) => {
-        firebase.database().ref('user/categories').once('value')
-          .then(snapshot => {
-            this.categories = snapshot.val()
-            resolve(this.categories);
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
-    }
+    return this.categoriesObservable;
   }
+    
+  // loadCategories(): any {
 
-  private async readCategories() {
-    const snapshot = await firebase.database().ref('user/categories').once('value');
-    console.log('2', snapshot.val())
-    return snapshot.val();
+  //   if (this.categories) {
+  //     return new Promise((resolve, reject) => {
+  //       resolve(this.categories);
+  //     });
+  //   } else {
+  //     return new Promise((resolve, reject) => {
+  //       firebase.database().ref('user/categories').once('value')
+  //         .then(snapshot => {
+  //           this.categories = snapshot.val()
+  //           resolve(this.categories);
+  //         })
+  //         .catch(error => {
+  //           reject(error);
+  //         });
+  //     });
+  //   }
+  // }
+
+  private loadCategories() {
+    firebase.database().ref('/user/categories').on('value', snapshot => {
+      console.log(snapshot);
+      const tempCategories = [];
+      snapshot.forEach(childSnapshot => {
+        console.log(childSnapshot.val())
+        var key = childSnapshot.key;
+        var childData = childSnapshot.val();
+        const category = { 
+          icon: childData.icon,
+          name: childData.name
+        }
+        tempCategories.push(category);
+      })
+
+      this.categories = tempCategories;
+      this.categoriesObserver.next(this.categories);
+    });
   }
 
   getDefaultCategoryName(): String {

@@ -56,8 +56,7 @@ export class TransactionProvider {
         tempTransactions[0].unshift(transaction);
       });
       this.transactions = tempTransactions;
-      console.log(this.transactions);
-      this.transactionsObserver.next(this.transactions)
+      this.transactionsObserver.next(this.transactions);
     }));
   }
 

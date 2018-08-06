@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { CategoryProvider } from '../../providers/category/category';
+import { AddCategoryPage } from '../../pages/add-category/add-category';
+
 /**
  * Generated class for the SelectCategoryPage page.
  *
@@ -19,15 +21,21 @@ export class SelectCategoryPage {
   categories: Object[] = [];
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider) { 
-    this.categoryService.loadCategories().then((data) => {
-      for(const category of Object.keys(data)) {
-        this.categories.push(data[category]);
-      }
-    }).catch(error => console.log(error));
+  }
+
+  ionViewDidLoad() {
+    this.categoryService.getCategories().subscribe((data) => {
+      this.categories = data;
+      console.log(this.categories);
+    })
   }
 
   selectCategory(category: Object[]) {
     this.navCtrl.getPrevious().data.category = category;
     this.navCtrl.pop();
+  }
+
+  addNewCategory() {
+    this.navCtrl.push(AddCategoryPage);
   }
 }

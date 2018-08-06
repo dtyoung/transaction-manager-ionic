@@ -19,6 +19,11 @@
       <ion-icon name={{category.icon}} item-start></ion-icon>
       {{category.name}}
     </ion-item>
+
+    <ion-item (click)="addNewCategory()">
+      <ion-icon name="md-add" item-start></ion-icon>
+      Add a New Category
+    </ion-item>
     
   </ion-list>
 </ion-content>

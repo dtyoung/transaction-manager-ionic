@@ -19,7 +19,8 @@ import {
   SelectCategoryPage,
   SelectIconPage,
   ViewTransactionsPage,
-  TransactionDetailPage
+  TransactionDetailPage,
+  AnalyticsPage
 } from '../pages';
 
 @NgModule({
@@ -32,7 +33,8 @@ import {
     AddCategoryPage,
     SelectIconPage,
     ViewTransactionsPage,
-    TransactionDetailPage
+    TransactionDetailPage,
+    AnalyticsPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import {
     AddCategoryPage,
     SelectIconPage,
     ViewTransactionsPage,
-    TransactionDetailPage
+    TransactionDetailPage,
+    AnalyticsPage
   ],
   providers: [
     StatusBar,

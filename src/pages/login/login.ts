@@ -32,7 +32,7 @@ export class LoginPage {
   doLogin() {
     firebase.auth().signInWithEmailAndPassword(this.account.email, this.account.password)
       .then(() => {
-        this.navCtrl.push(ViewTransactionsPage);
+        this.navCtrl.setRoot(ViewTransactionsPage);
       }).catch((error) => {
         console.log("Not working" + error);
       });

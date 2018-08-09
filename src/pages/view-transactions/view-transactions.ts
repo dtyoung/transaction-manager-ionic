@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TransactionProvider } from '../../providers/transaction/transaction';
 import { AddTransactionPage, TransactionDetailPage } from '../../pages';
 
+
 /**
  * Generated class for the ViewTransactionsPage page.
  *

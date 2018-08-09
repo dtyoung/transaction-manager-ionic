@@ -22,7 +22,6 @@ export class TransactionProvider {
       this.transactionsObserver = observer;
       this.loadTransactionsByDate();
     })
-
   }
 
   addTransaction(value: Number, category: String, date: String, notes: String, icon: String) {
@@ -33,10 +32,7 @@ export class TransactionProvider {
   }
 
   transactionUpdatesByDate(): Observable<Object[][]> {
-    // this.updatedSinceLastRead = false;
-
     return this.transactionsObservable;
-    // return this.transactions;
   }
 
   private loadTransactionsByDate() {

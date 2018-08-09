@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
 import { ENV } from '@app/env';
+
 
 import { LoginPage } from '../pages/login/login';
 import { AddTransactionPage } from '../pages/add-transaction/add-transaction';
@@ -11,18 +12,22 @@ import { SelectCategoryPage } from '../pages/select-category/select-category';
 import { AddCategoryPage } from '../pages/add-category/add-category';
 import { SelectIconPage } from '../pages/select-icon/select-icon';
 import { ViewTransactionsPage } from '../pages/view-transactions/view-transactions';
+import { AnalyticsPage } from '../pages/analytics/analytics';
 
 import { TransactionProvider } from '../providers/transaction/transaction';
+
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [TransactionProvider]
 })
 export class MyApp {
-  rootPage: any = SelectCategoryPage;
+  @ViewChild(Nav) nav:Nav;
+  
+  rootPage: any = LoginPage;
+  pages: Array<{title: String, component: any}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, transactionService: TransactionProvider) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
@@ -37,7 +42,18 @@ export class MyApp {
     };
 
     firebase.initializeApp(config);
+
+    this.pages = [
+      { title: 'Transactions', component: ViewTransactionsPage },
+      { title: 'Categories', component: SelectCategoryPage },
+      { title: 'Analytics', component: AnalyticsPage }
+    ]
   }
+
+  openPage(page) {
+    this.nav.setRoot(page.component);
+  }
+
 
 }
 

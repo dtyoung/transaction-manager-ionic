@@ -31,7 +31,7 @@ export class CreateAccountPage {
     this.createAccountForm = formBuilder.group({
       email: ['', Validators.compose([Validators.email, Validators.required])],
       password: ['', Validators.compose([PasswordValidator.isValid, Validators.required])],
-      confirmPassword: ['', Validators.compose([Validators.required, ConfirmPasswordValidator.isValid])]
+      confirmPassword: ['', Validators.compose([ConfirmPasswordValidator.isValid, Validators.required])]
     });
     
   }

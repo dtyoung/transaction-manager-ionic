@@ -17,5 +17,51 @@
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>Start Date</ion-label>
+      <ion-datetime 
+        displayFormat="DD/MM/YYYY" 
+        [(ngModel)]="startDate" 
+        placeholder="DD/MM/YYYY" 
+        (ionChange)="updateChart()">
+      </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>End Date</ion-label>
+      <ion-datetime
+        displayFormat="DD/MM/YYYY"
+        [(ngModel)]="endDate"
+        placeholder="DD/MM/YYYY"
+        (ionChange)="updateChart()">
+      </ion-datetime>
+    </ion-item>
+  </ion-list>
 
+  <!-- Pie Chart -->
+  <ion-card>
+    <ion-card-header>
+      Doughnut Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-list>
+      <ion-item *ngFor="let category of totalsByCategory">
+        <ion-row>
+          <ion-col col-1>
+          </ion-col>
+          <ion-col col-8>
+            {{category.category}}
+          </ion-col>
+          <ion-col col-3>
+            ${{category.total}}
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>

@@ -4,6 +4,8 @@ import firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
+var moment = require('moment');
+
 /*
   Generated class for the TransactionProvider provider.
 
@@ -21,7 +23,9 @@ export class TransactionProvider {
     this.transactionsObservable = Observable.create(observer => {
       this.transactionsObserver = observer;
       this.loadTransactionsByDate();
+      
     })
+
   }
 
   addTransaction(value: Number, category: String, date: String, notes: String, icon: String) {
@@ -55,5 +59,23 @@ export class TransactionProvider {
       this.transactionsObserver.next(this.transactions);
     }));
   }
+
+  
+
+  // /**
+  //  * Finds the closest date in the transactions array to the passed date
+  //  * @param date Date to check against
+  //  */
+  // private getClosestDate(date: String) {
+  //   const convertedDate = moment(date, 'YYYY-MM-DD');
+    
+  //   this.transactions.forEach(transaction => {
+
+  //   });
+
+    
+  // }
+
+  
 
 }

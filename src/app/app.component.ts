@@ -13,7 +13,7 @@ import { AddCategoryPage } from '../pages/add-category/add-category';
 import { SelectIconPage } from '../pages/select-icon/select-icon';
 import { ViewTransactionsPage } from '../pages/view-transactions/view-transactions';
 import { AnalyticsPage } from '../pages/analytics/analytics';
-
+import {  } from '../pages/analytics/analytics';
 import { TransactionProvider } from '../providers/transaction/transaction';
 
 @Component({

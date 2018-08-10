@@ -41,7 +41,7 @@
   <!-- Pie Chart -->
   <ion-card>
     <ion-card-header>
-      Doughnut Chart
+      Donut Chart
     </ion-card-header>
     <ion-card-content>
       <canvas #doughnutCanvas></canvas>
@@ -53,6 +53,7 @@
       <ion-item *ngFor="let category of totalsByCategory">
         <ion-row>
           <ion-col col-1>
+            <ion-icon name={{category.icon}}></ion-icon>
           </ion-col>
           <ion-col col-8>
             {{category.category}}

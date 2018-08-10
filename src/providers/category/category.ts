@@ -14,15 +14,12 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class CategoryProvider {
 
-  private categories: Object[];
+  private categories: { name: String, icon: String}[];
   private categoriesObservable: Observable<Object[]>;
   private categoriesObserver;
 
   constructor(public http: Http) {
-    this.categoriesObservable = Observable.create(observer => {
-      this.categoriesObserver = observer;
-      this.loadCategories();
-    })
+    
   }
 
   getCategories(): Observable<Object[]> {
@@ -49,6 +46,13 @@ export class CategoryProvider {
   //     });
   //   }
   // }
+
+  init() {
+    this.categoriesObservable = Observable.create(observer => {
+      this.categoriesObserver = observer;
+      this.loadCategories();
+    })
+  }
 
   private loadCategories() {
     firebase.database().ref('/user/categories').on('value', snapshot => {
@@ -81,6 +85,14 @@ export class CategoryProvider {
   loadIcons(): any {
     return this.http.get('assets/data/icons.json')
       .map(res => res.json());
+  }
+
+  getIconFromCategoryName(categoryName: String) {
+    const category = this.categories.find((element) => {
+      return element.name === categoryName;
+    });
+
+    return category && category.icon ? category.icon : 'md-help';
   }
 
   addCategory(name: String, icon: String) {

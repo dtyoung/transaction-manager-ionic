@@ -13,20 +13,20 @@ import { AddCategoryPage } from '../pages/add-category/add-category';
 import { SelectIconPage } from '../pages/select-icon/select-icon';
 import { ViewTransactionsPage } from '../pages/view-transactions/view-transactions';
 import { AnalyticsPage } from '../pages/analytics/analytics';
-import {  } from '../pages/analytics/analytics';
 import { TransactionProvider } from '../providers/transaction/transaction';
+import { CategoryProvider } from '../providers';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [TransactionProvider]
+  providers: [TransactionProvider, CategoryProvider]
 })
 export class MyApp {
   @ViewChild(Nav) nav:Nav;
   
-  rootPage: any = LoginPage;
+  rootPage: any = ViewTransactionsPage;
   pages: Array<{title: String, component: any}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, transactionService: TransactionProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, transactionService: TransactionProvider, categoryService: CategoryProvider) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
@@ -47,7 +47,12 @@ export class MyApp {
       { title: 'Transactions', component: ViewTransactionsPage },
       { title: 'Categories', component: SelectCategoryPage },
       { title: 'Analytics', component: AnalyticsPage }
+    
     ]
+    console.log('Test');
+    transactionService.init();
+    categoryService.init();
+    console.log('Test2');
   }
 
   openPage(page) {

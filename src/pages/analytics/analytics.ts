@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
-import { TransactionProvider } from '../../providers';
+import { TransactionProvider, CategoryProvider } from '../../providers';
 
 var moment = require('moment');
 var group = require('group-reduce');
@@ -27,14 +27,16 @@ export class AnalyticsPage {
   transactions: any
   transactionsByCategory;
   totalsByCategory;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider) { 
+  categories;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider, public categoryService: CategoryProvider) { 
     this.endDate = moment().format('YYYY-MM-DD');
     this.startDate = moment().subtract(1, 'month').format('YYYY-MM-DD');
   }
 
   ionViewDidLoad() {
     this.transactionService.transactionUpdatesByDate().subscribe(data => this.transactions = data);
+
+    
 
     this.totalsByCategory = this.getTotalByCategory(this.startDate, this.endDate);
     const labels = this.totalsByCategory.map((transaction) => transaction.category);
@@ -92,10 +94,12 @@ export class AnalyticsPage {
     .reduce((category, entries) => {
       return {
         category: category,
-        total: entries.map(this.getValue).reduce(this.sumTotal)
+        total: entries.map(this.getValue).reduce(this.sumTotal),
+        icon: this.categoryService.getIconFromCategoryName(category)
       }
     })
 
+    console.log(totalsByCategory)
     return totalsByCategory;
   }
 

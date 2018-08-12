@@ -27,10 +27,7 @@ export class TransactionDetailPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TransactionDetailPage');
-    console.log(this.navParams.get('transaction'));
     this.transaction = this.navParams.get('transaction');
-    console.log('test', this.transaction.value);
   }
 
   getValue(): String {

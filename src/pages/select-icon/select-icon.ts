@@ -23,12 +23,7 @@ export class SelectIconPage {
       for(const icon of Object.keys(data)) {
         this.icons.push(data[icon]);
       }
-      console.log(this.icons);
     });  
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SelectIconPage');
   }
 
   selectIcon(icon: String){

@@ -31,7 +31,6 @@ export class ViewTransactionsPage {
   }
 
   moreDetailTransaction(transaction: Object) {
-    console.log('first', transaction)
     this.navCtrl.push(TransactionDetailPage, { transaction })
   }
 }

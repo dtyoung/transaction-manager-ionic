@@ -26,7 +26,6 @@ export class SelectCategoryPage {
   ionViewDidLoad() {
     this.categoryService.getCategories().subscribe((data) => {
       this.categories = data;
-      console.log(this.categories);
     })
   }
 

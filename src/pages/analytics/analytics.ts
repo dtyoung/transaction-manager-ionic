@@ -99,7 +99,6 @@ export class AnalyticsPage {
       }
     })
 
-    console.log(totalsByCategory)
     return totalsByCategory;
   }
 

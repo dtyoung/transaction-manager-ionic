@@ -20,15 +20,15 @@ export class TransactionProvider {
   private transactionsObserver;
 
   constructor() {
-    
-
-  }
-
-  init() {
     this.transactionsObservable = Observable.create(observer => {
       this.transactionsObserver = observer;
       this.loadTransactionsByDate();
     })
+
+  }
+
+  init() {
+    
   }
 
   addTransaction(value: Number, category: String, date: String, notes: String, icon: String) {

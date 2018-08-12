@@ -23,7 +23,7 @@ import { CategoryProvider } from '../providers';
 export class MyApp {
   @ViewChild(Nav) nav:Nav;
   
-  rootPage: any = ViewTransactionsPage;
+  rootPage: any = LoginPage;
   pages: Array<{title: String, component: any}>;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, transactionService: TransactionProvider, categoryService: CategoryProvider) {
@@ -49,10 +49,10 @@ export class MyApp {
       { title: 'Analytics', component: AnalyticsPage }
     
     ]
-    console.log('Test');
-    transactionService.init();
-    categoryService.init();
-    console.log('Test2');
+
+    // Initialize the providers by subscribing to them
+    transactionService.transactionUpdatesByDate().subscribe();
+    categoryService.getCategories().subscribe();
   }
 
   openPage(page) {

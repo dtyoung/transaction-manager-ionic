@@ -19,7 +19,10 @@ export class CategoryProvider {
   private categoriesObserver;
 
   constructor(public http: Http) {
-    
+    this.categoriesObservable = Observable.create(observer => {
+      this.categoriesObserver = observer;
+      this.loadCategories();
+    })
   }
 
   getCategories(): Observable<Object[]> {
@@ -47,19 +50,10 @@ export class CategoryProvider {
   //   }
   // }
 
-  init() {
-    this.categoriesObservable = Observable.create(observer => {
-      this.categoriesObserver = observer;
-      this.loadCategories();
-    })
-  }
-
   private loadCategories() {
     firebase.database().ref('/user/categories').on('value', snapshot => {
-      console.log(snapshot);
       const tempCategories = [];
       snapshot.forEach(childSnapshot => {
-        console.log(childSnapshot.val())
         var key = childSnapshot.key;
         var childData = childSnapshot.val();
         const category = { 

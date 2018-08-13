@@ -26,7 +26,8 @@ export class AnalyticsPage {
 
   transactions: any
   transactionsByCategory;
-  totalsByCategory;
+  totalsByCategoryGraph: { category: string, total: Number, icon: String }[];
+  totalsByCategory: { category: string, total: Number, icon: String }[];
   categories;
   constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider, public categoryService: CategoryProvider) { 
     this.endDate = moment().format('YYYY-MM-DD');
@@ -36,11 +37,10 @@ export class AnalyticsPage {
   ionViewDidLoad() {
     this.transactionService.transactionUpdatesByDate().subscribe(data => this.transactions = data);
 
-    
+    this.setTransactionData();
 
-    this.totalsByCategory = this.getTotalByCategory(this.startDate, this.endDate);
-    const labels = this.totalsByCategory.map((transaction) => transaction.category);
-    const data = this.totalsByCategory.map((transaction) => transaction.total);
+    const labels = this.totalsByCategoryGraph.map((transaction) => transaction.category);
+    const data = this.totalsByCategoryGraph.map((transaction) => transaction.total);
     this.pieChart = new Chart(this.doughnutCanvas.nativeElement, {
  
       type: 'doughnut',
@@ -50,7 +50,6 @@ export class AnalyticsPage {
               label: '# of Votes',
               data: data,
               backgroundColor: [
-                  'rgb(255, 99, 132)',
                   'rgb(54, 162, 235)',
                   'rgb(255, 206, 86)',
                   'rgb(75, 192, 192)',
@@ -63,16 +62,29 @@ export class AnalyticsPage {
   });
   }
 
-
   updateChart() {
-    this.totalsByCategory = this.getTotalByCategory(this.startDate, this.endDate);
-    const labels = this.totalsByCategory.map((transaction) => transaction.category);
-    const data = this.totalsByCategory.map((transaction) => transaction.total);
+    this.setTransactionData();
+
+    const labels = this.totalsByCategoryGraph.map((transaction) => transaction.category);
+    const data = this.totalsByCategoryGraph.map((transaction) => transaction.total);
     
     this.pieChart.data.datasets[0].data = data;
     this.pieChart.data.labels = labels;
 
     this.pieChart.update();
+  }
+
+  setTransactionData() {
+    this.totalsByCategory = this.getTotalByCategory(this.startDate, this.endDate);
+    // Show 'Other Categories in graph'
+    if(this.totalsByCategory.length > 4) {
+      const extraCategories = this.totalsByCategory.slice(4);
+      const totalOfExtraCategories = extraCategories.map(this.getTotal).reduce(this.sumTotal);
+      this.totalsByCategoryGraph = this.totalsByCategory.slice(0, 4)
+      this.totalsByCategoryGraph.push({ category: 'Other Categories', total: totalOfExtraCategories, icon: '' })
+    } else {
+      this.totalsByCategoryGraph = this.totalsByCategory; 
+    }
   }
 
   getTotalByCategory(startDate: String, endDate: String) {
@@ -99,11 +111,18 @@ export class AnalyticsPage {
       }
     })
 
+    totalsByCategory.sort( (a, b) => {return b.total - a.total});
+
     return totalsByCategory;
   }
 
+  // Reduce and Map helpers
   private getValue(entry) {
     return +entry.value;
+  }
+
+  private getTotal(entry) {
+    return +entry.total;
   }
 
   private sumTotal(a, b) {

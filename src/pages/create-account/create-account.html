@@ -8,33 +8,32 @@
 
 
 <ion-content>
-  <form [formGroup]="createAccountForm" (submit)="registerAccount()">
+  <form [formGroup]="createAccountForm" (submit)="validateInformation()">
     <ion-list>
 
       <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input formControlName="email" type="email" [(ngModel)]="account.email" name="email"></ion-input>
       </ion-item>
-
       
-
       <ion-item>
         <ion-label floating>Password</ion-label>
         <ion-input formControlName="password" type="password" [(ngModel)]="account.password" name="password"></ion-input>
       </ion-item>
-      
-      <p *ngIf="createAccountForm.controls.password.errors && createAccountForm.controls.password.errors.notLongEnough && createAccountForm.controls.password.dirty">Password not long enough<p>
 
       <ion-item>
         <ion-label floating>Confirm Password</ion-label>
         <ion-input formControlName="confirmPassword" type="password" [(ngModel)]="account.confirmPassword" name="confirm-password"></ion-input>
       </ion-item>
-
-      <p *ngIf="createAccountForm.controls.confirmPassword.errors && createAccountForm.controls.confirmPassword.errors.passwordsDontMatch && createAccountForm.controls.confirmPassword.dirty">Passwords do not match<p>
-
-
+      
+      <ion-item *ngIf="error">
+        <p class="error-message">{{errorMessage}}</p>
+      </ion-item>
       <div padding>
-        <button ion-button color="primary" block>Create Account</button>
+        <button ion-button color="primary" block *ngIf="!loading">Create Account</button>
+        <button ion-button color="primary" block *ngIf="loading">
+          <ion-spinner name="dots"></ion-spinner>
+        </button>
       </div>
 
     </ion-list>

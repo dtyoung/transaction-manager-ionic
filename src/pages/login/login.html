@@ -21,12 +21,20 @@
         <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
       </ion-item>
       
+      <ion-item  *ngIf="error">
+        <p class="error-message">{{errorMessage}}</p>
+      </ion-item>  
+
       <ion-item>
         <p>Don't have an account? Click <a (click)="goToCreateAccountPage()">here</a> to create one.</p>
       </ion-item>  
 
       <div padding>
-        <button ion-button color="primary" block>Login</button>
+        <button ion-button color="primary" block *ngIf="!loggingIn">Login</button>
+        <button ion-button color="primary" block *ngIf="loggingIn">
+          <ion-spinner name="dots"></ion-spinner>
+        </button>
+        
       </div>
 
     </ion-list>

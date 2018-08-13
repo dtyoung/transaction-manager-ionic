@@ -19,6 +19,9 @@ import { ConfirmPasswordValidator, PasswordValidator } from '../../validators';
 export class CreateAccountPage {
 
   createAccountForm: FormGroup;
+  errorMessage: String = '';
+  error: Boolean = false;
+  loading:Boolean = false;
 
   account: { email: string, password: string, confirmPassword: string } = {
     email: '',
@@ -37,17 +40,72 @@ export class CreateAccountPage {
   }
 
   registerAccount() {
-    if(this.createAccountForm.valid) {
+    this.error = false;
+    this.errorMessage = '';
+    if(this.account.email === '' || this.account.password === '') {
+      this.error = true;
+      this.errorMessage = 'Please enter an email and password';
+    } else if (this.account.confirmPassword === '') {
+      this.error = true;
+      this.errorMessage = 'Please confirm your password';
+    } else if(this.createAccountForm.valid) {
+      this.loading = true;
       firebase.auth().createUserWithEmailAndPassword(this.account.email, this.account.password)
         .then(() => {
+          this.loading = false;
           this.createAccountForm.reset();
           this.presentAlert();
         })
         .catch((error) => {
           // Inform the user that the email is taken
+          this.loading = false;
+          this.error = true;
+          this.errorMessage = 'This email is already in use.'
+          this.account.password = '';
+          this.account.confirmPassword = '';
           console.log(error);
         });
     }
+  }
+
+  validateInformation() {
+    this.error = false;
+    this.errorMessage = '';
+    if(this.account.email === '' || this.account.password === '') {
+      this.error = true;
+      this.errorMessage = 'Please enter an email and password';
+    } else if (
+      this.createAccountForm.controls.password.errors && 
+      this.createAccountForm.controls.password.errors.notLongEnough &&
+      this.createAccountForm.controls.password.dirty) {
+        this.error = true;
+        this.errorMessage = 'Password not long enough';
+    } else if (this.account.confirmPassword === '') {
+      this.error = true;
+      this.errorMessage = 'Please confirm your password';
+    } else if(this.createAccountForm.controls.confirmPassword.errors && this.createAccountForm.controls.confirmPassword.errors.passwordsDontMatch && this.createAccountForm.controls.confirmPassword.dirty) {
+      this.error = true;
+      this.errorMessage = "Passwords do not match";
+    } else if (this.createAccountForm.valid){
+      this.loading = true;
+      firebase.auth().createUserWithEmailAndPassword(this.account.email, this.account.password)
+        .then(() => {
+          this.loading = false;
+          this.createAccountForm.reset();
+          this.presentAlert();
+        })
+        .catch((error) => {
+          // Inform the user that the email is taken
+          this.loading = false;
+          this.error = true;
+          this.errorMessage = 'This email is already in use.'
+          this.account.password = '';
+          this.account.confirmPassword = '';
+          console.log(error);
+        });
+    }
+
+
   }
 
   presentAlert() {

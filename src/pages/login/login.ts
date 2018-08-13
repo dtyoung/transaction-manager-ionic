@@ -19,22 +19,35 @@ import { ViewTransactionsPage } from '../view-transactions/view-transactions';
 })
 export class LoginPage {
 
+  loggingIn: Boolean;
+  error: Boolean;
+  errorMessage: String;
 
   account: { email: string, password: string } = {
     email: 'test@test.com',
-    password: 'password'
+    password: 'password' 
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
+    this.loggingIn = false;
   }
 
   doLogin() {
+    this.loggingIn = true;
+    this.error = false;
+    this.errorMessage = '';
     firebase.auth().signInWithEmailAndPassword(this.account.email, this.account.password)
       .then(() => {
         this.navCtrl.setRoot(ViewTransactionsPage);
+        this.loggingIn = false;
       }).catch((error) => {
-        console.log("Not working" + error);
+        this.loggingIn = false;
+        this.error = true;
+        if(this.account.email === '' || this.account.password === '') {
+          this.errorMessage = 'Please enter an email and password'
+        } else {
+          this.errorMessage = 'Incorrect email or password'
+        }
       });
   }
 

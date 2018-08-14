@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import firebase from 'firebase';
 
 import { CreateAccountPage } from '../create-account/create-account';
@@ -28,8 +28,16 @@ export class LoginPage {
     password: 'password' 
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.loggingIn = false;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController) {
+    this.loggingIn = false;    
+  }
+
+  ionViewWillEnter(){
+    this.menu.swipeEnable(false);
+  }
+
+  ionViewWillLeave(){
+    this.menu.swipeEnable(true);
   }
 
   doLogin() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, MenuController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import firebase from 'firebase';
 
@@ -29,43 +29,20 @@ export class CreateAccountPage {
     confirmPassword: ''
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, private alertCtrl: AlertController) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, private alertCtrl: AlertController, public menu: MenuController) {
     this.createAccountForm = formBuilder.group({
       email: ['', Validators.compose([Validators.email, Validators.required])],
       password: ['', Validators.compose([PasswordValidator.isValid, Validators.required])],
       confirmPassword: ['', Validators.compose([ConfirmPasswordValidator.isValid, Validators.required])]
     });
-    
   }
 
-  registerAccount() {
-    this.error = false;
-    this.errorMessage = '';
-    if(this.account.email === '' || this.account.password === '') {
-      this.error = true;
-      this.errorMessage = 'Please enter an email and password';
-    } else if (this.account.confirmPassword === '') {
-      this.error = true;
-      this.errorMessage = 'Please confirm your password';
-    } else if(this.createAccountForm.valid) {
-      this.loading = true;
-      firebase.auth().createUserWithEmailAndPassword(this.account.email, this.account.password)
-        .then(() => {
-          this.loading = false;
-          this.createAccountForm.reset();
-          this.presentAlert();
-        })
-        .catch((error) => {
-          // Inform the user that the email is taken
-          this.loading = false;
-          this.error = true;
-          this.errorMessage = 'This email is already in use.'
-          this.account.password = '';
-          this.account.confirmPassword = '';
-          console.log(error);
-        });
-    }
+  ionViewWillEnter(){
+    this.menu.swipeEnable(false);
+  }
+
+  ionViewWillLeave(){
+    this.menu.swipeEnable(true);
   }
 
   validateInformation() {
@@ -74,6 +51,9 @@ export class CreateAccountPage {
     if(this.account.email === '' || this.account.password === '') {
       this.error = true;
       this.errorMessage = 'Please enter an email and password';
+    } else if (this.createAccountForm.controls.email.errors) {
+      this.error = true;
+      this.errorMessage = 'Please enter a valid email';
     } else if (
       this.createAccountForm.controls.password.errors && 
       this.createAccountForm.controls.password.errors.notLongEnough &&
@@ -101,11 +81,8 @@ export class CreateAccountPage {
           this.errorMessage = 'This email is already in use.'
           this.account.password = '';
           this.account.confirmPassword = '';
-          console.log(error);
         });
     }
-
-
   }
 
   presentAlert() {

@@ -92,7 +92,7 @@ export class AnalyticsPage {
     const momentStartDate = moment(startDate, "YYYY-MM-DD");
     const momentEndDate = moment(endDate, "YYYY-MM-DD");
     this.transactionsByCategory = this.transactions.filter(transactionBucket => {
-      const momentCurrentDate = moment(transactionBucket[0].key.date, "YYYY-MM-DD");
+      const momentCurrentDate = moment(transactionBucket[0].date, "YYYY-MM-DD");
 
       return momentCurrentDate.isSameOrAfter(momentStartDate) && momentCurrentDate.isSameOrBefore(momentEndDate);
 
@@ -100,7 +100,7 @@ export class AnalyticsPage {
 
 
     // Create an array mapping the category to total amount spent
-    const flatTransactions = ([].concat.apply([], this.transactionsByCategory)).map(transaction => transaction.key)
+    const flatTransactions = ([].concat.apply([], this.transactionsByCategory))
 
     const totalsByCategory = group(flatTransactions).by('category')
     .reduce((category, entries) => {

@@ -23,7 +23,8 @@ export class ViewTransactionsPage {
   }
 
   ionViewDidLoad() {
-    this.transactionService.transactionUpdatesByDate().subscribe(data => this.transactions = data);
+    this.transactionService.transactionUpdatesByDate().subscribe(data => {this.transactions = data; console.log(this.transactions)});
+    
   }
 
   addTransaction() {

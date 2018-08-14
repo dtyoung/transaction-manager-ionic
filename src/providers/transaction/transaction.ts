@@ -27,10 +27,6 @@ export class TransactionProvider {
 
   }
 
-  init() {
-    
-  }
-
   addTransaction(value: Number, category: String, date: String, notes: String, icon: String) {
     const database = firebase.database();
     database.ref('/user/transactions').push({
@@ -49,8 +45,10 @@ export class TransactionProvider {
       var prevDate = "";
       snapshot.forEach(childSnapshot => {
         var key = childSnapshot.key;
+        
         var childData = childSnapshot.val();
-        const transaction = { key: childData }
+        childData.id = key;
+        const transaction = childData;
 
         if (childData.date !== prevDate) {
           prevDate = childData.date;
@@ -63,22 +61,11 @@ export class TransactionProvider {
     }));
   }
 
-  
+  updateTransaction(key: String, transaction: any) {
+    var update = {};
+    update['/user/transactions/'+ key] = transaction;
 
-  // /**
-  //  * Finds the closest date in the transactions array to the passed date
-  //  * @param date Date to check against
-  //  */
-  // private getClosestDate(date: String) {
-  //   const convertedDate = moment(date, 'YYYY-MM-DD');
-    
-  //   this.transactions.forEach(transaction => {
-
-  //   });
-
-    
-  // }
-
-  
-
+    return firebase.database().ref().update(update)
+  }
 }
+

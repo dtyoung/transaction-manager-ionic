@@ -23,20 +23,20 @@
   </ion-fab>
   <ion-card *ngFor="let date of transactions">
     <ion-card-header>
-      {{date[0].key.date}}
+      {{date[0].date}}
     </ion-card-header>
 
     <ion-list>
-      <ion-item *ngFor="let transaction of date" (click)="moreDetailTransaction(transaction.key)">
+      <ion-item *ngFor="let transaction of date" (click)="moreDetailTransaction(transaction)">
         <ion-row>
           <ion-col col-1>
-            <ion-icon name={{transaction.key.icon}}></ion-icon>
+            <ion-icon name={{transaction.icon}}></ion-icon>
           </ion-col>
           <ion-col col-8>
-            {{transaction.key.category}}
+            {{transaction.category}}
           </ion-col>
           <ion-col col-3>
-            ${{transaction.key.value}}
+            ${{transaction.value}}
           </ion-col>
         </ion-row>
       </ion-item>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CategoryProvider } from '../../providers/category/category';
+import { EditTransactionPage } from '../../pages';
 /**
  * Generated class for the TransactionDetailPage page.
  *
@@ -16,6 +17,7 @@ import { CategoryProvider } from '../../providers/category/category';
 export class TransactionDetailPage {
 
   transaction: {
+    id: String,
     category: String,
     date: String,
     icon: String,
@@ -51,6 +53,11 @@ export class TransactionDetailPage {
       return this.transaction.notes ? this.transaction.notes : 'No Notes'
     }
     return '';
+  }
+
+  editTransaction() {
+    const transaction = this.transaction;
+    this.navCtrl.push(EditTransactionPage, { transaction })
   }
 
 }

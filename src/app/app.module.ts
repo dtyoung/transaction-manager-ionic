@@ -20,12 +20,13 @@ import {
   SelectIconPage,
   ViewTransactionsPage,
   TransactionDetailPage,
-  AnalyticsPage
+  AnalyticsPage,
+  EditTransactionPage
 } from '../pages';
 
 @NgModule({
   declarations: [
-    MyApp,
+    MyApp, 
     LoginPage,
     CreateAccountPage,
     AddTransactionPage,
@@ -34,7 +35,8 @@ import {
     SelectIconPage,
     ViewTransactionsPage,
     TransactionDetailPage,
-    AnalyticsPage
+    AnalyticsPage,
+    EditTransactionPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import {
     SelectIconPage,
     ViewTransactionsPage,
     TransactionDetailPage,
-    AnalyticsPage
+    AnalyticsPage,
+    EditTransactionPage
   ],
   providers: [
     StatusBar,

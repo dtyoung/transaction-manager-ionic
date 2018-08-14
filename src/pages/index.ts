@@ -7,3 +7,4 @@ export { SelectIconPage } from '../pages/select-icon/select-icon';
 export { ViewTransactionsPage } from '../pages/view-transactions/view-transactions';
 export { TransactionDetailPage } from '../pages/transaction-detail/transaction-detail';
 export { AnalyticsPage } from '../pages/analytics/analytics';
+export { EditTransactionPage } from '../pages/edit-transaction/edit-transaction';

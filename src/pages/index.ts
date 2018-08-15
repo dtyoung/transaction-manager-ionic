@@ -8,3 +8,4 @@ export { ViewTransactionsPage } from '../pages/view-transactions/view-transactio
 export { TransactionDetailPage } from '../pages/transaction-detail/transaction-detail';
 export { AnalyticsPage } from '../pages/analytics/analytics';
 export { EditTransactionPage } from '../pages/edit-transaction/edit-transaction';
+export { TransactionPopoverPage } from '../pages/transaction-popover/transaction-popover';

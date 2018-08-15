@@ -23,7 +23,7 @@
   </ion-fab>
   <ion-card *ngFor="let date of transactions">
     <ion-card-header>
-      {{date[0].date}}
+      {{formatDate(date[0].date)}}
     </ion-card-header>
 
     <ion-list>

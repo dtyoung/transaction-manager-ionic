@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TransactionProvider } from '../../providers/transaction/transaction';
 import { AddTransactionPage, TransactionDetailPage } from '../../pages';
-
+var moment = require('moment')
 
 /**
  * Generated class for the ViewTransactionsPage page.
@@ -23,8 +23,7 @@ export class ViewTransactionsPage {
   }
 
   ionViewDidLoad() {
-    this.transactionService.transactionUpdatesByDate().subscribe(data => {this.transactions = data; console.log(this.transactions)});
-    
+    this.transactionService.transactionUpdatesByDate().subscribe(data => this.transactions = data);
   }
 
   addTransaction() {
@@ -33,5 +32,9 @@ export class ViewTransactionsPage {
 
   moreDetailTransaction(transaction: Object) {
     this.navCtrl.push(TransactionDetailPage, { transaction })
+  }
+
+  formatDate(date: String): String {
+    return moment(date, 'YYYY-MM-DD').format('dddd Do MMMM');
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { CategoryProvider } from '../../providers/category/category';
-import { EditTransactionPage } from '../../pages';
+import { EditTransactionPage, TransactionPopoverPage } from '../../pages';
 /**
  * Generated class for the TransactionDetailPage page.
  *
@@ -25,7 +25,7 @@ export class TransactionDetailPage {
     value: String
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider, private popoverCtrl: PopoverController) {
   }
 
   ionViewDidLoad() {
@@ -58,6 +58,13 @@ export class TransactionDetailPage {
   editTransaction() {
     const transaction = this.transaction;
     this.navCtrl.push(EditTransactionPage, { transaction })
+  }
+
+  presentPopover(ev) {
+    const transaction = this.transaction;
+    let popover = this.popoverCtrl.create(TransactionPopoverPage, {transaction});
+    
+    popover.present({ ev: ev });
   }
 
 }

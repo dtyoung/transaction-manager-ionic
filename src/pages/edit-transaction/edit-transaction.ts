@@ -41,7 +41,6 @@ export class EditTransactionPage {
 
   ionViewDidLoad() {
     this.transaction = this.navParams.get('transaction');
-    console.log(this.transaction);
   }
 
   ionViewWillEnter() {

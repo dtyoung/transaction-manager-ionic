@@ -67,5 +67,13 @@ export class TransactionProvider {
 
     return firebase.database().ref().update(update)
   }
+
+  deleteTransaction(key: String) {
+    console.log('key', key);
+    var update = {};
+    update['/user/transactions/'+ key] = null;
+
+    return firebase.database().ref().update(update)
+  }
 }
 

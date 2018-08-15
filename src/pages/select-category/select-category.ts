@@ -18,6 +18,7 @@ import { AddCategoryPage } from '../../pages/add-category/add-category';
 })
 export class SelectCategoryPage {
 
+  canSelect: Boolean = false;
   categories: Object[] = [];
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider) { 
@@ -27,11 +28,14 @@ export class SelectCategoryPage {
     this.categoryService.getCategories().subscribe((data) => {
       this.categories = data;
     })
+    this.canSelect = this.navParams.get('canSelect');
   }
 
   selectCategory(category: Object[]) {
+    if(this.canSelect) {
     this.navCtrl.getPrevious().data.category = category;
     this.navCtrl.pop();
+    }
   }
 
   addNewCategory() {

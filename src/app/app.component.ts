@@ -49,10 +49,6 @@ export class MyApp {
       { title: 'Analytics', component: AnalyticsPage }
     
     ]
-
-    // Initialize the providers by subscribing to them
-    transactionService.transactionUpdatesByDate().subscribe();
-    categoryService.getCategories().subscribe();
   }
 
   openPage(page) {

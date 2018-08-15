@@ -34,7 +34,7 @@ export class AddTransactionPage {
   }
 
   selectCategory() {
-    this.navCtrl.push(SelectCategoryPage, { "parentPage": this });
+    this.navCtrl.push(SelectCategoryPage, { "parentPage": this, "canSelect": true });
   }
 
   getCategoryText(): String {

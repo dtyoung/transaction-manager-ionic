@@ -26,32 +26,12 @@ export class CategoryProvider {
   }
 
   getCategories(): Observable<Object[]> {
-
     return this.categoriesObservable;
   }
-    
-  // loadCategories(): any {
-
-  //   if (this.categories) {
-  //     return new Promise((resolve, reject) => {
-  //       resolve(this.categories);
-  //     });
-  //   } else {
-  //     return new Promise((resolve, reject) => {
-  //       firebase.database().ref('user/categories').once('value')
-  //         .then(snapshot => {
-  //           this.categories = snapshot.val()
-  //           resolve(this.categories);
-  //         })
-  //         .catch(error => {
-  //           reject(error);
-  //         });
-  //     });
-  //   }
-  // }
 
   private loadCategories() {
-    firebase.database().ref('/user/categories').on('value', snapshot => {
+    const { currentUser } = firebase.auth();
+    firebase.database().ref(`/users/${currentUser.uid}/categories`).on('value', snapshot => {
       const tempCategories = [];
       snapshot.forEach(childSnapshot => {
         var key = childSnapshot.key;
@@ -90,8 +70,9 @@ export class CategoryProvider {
   }
 
   addCategory(name: String, icon: String) {
+    const { currentUser } = firebase.auth();
     const database = firebase.database();
-    database.ref('/user/categories').push({
+    database.ref(`/users/${currentUser.uid}/categories`).push({
       name, icon
     });
   }

@@ -24,12 +24,12 @@ export class TransactionProvider {
       this.transactionsObserver = observer;
       this.loadTransactionsByDate();
     })
-
   }
 
   addTransaction(value: Number, category: String, date: String, notes: String, icon: String) {
+    const { currentUser } = firebase.auth();
     const database = firebase.database();
-    database.ref('/user/transactions').push({
+    database.ref(`/users/${currentUser.uid}/transactions`).push({
       value, category, date, notes, icon
     });
   }
@@ -39,7 +39,10 @@ export class TransactionProvider {
   }
 
   private loadTransactionsByDate() {
-    firebase.database().ref('/user/transactions').orderByChild('date').on('value', (snapshot => {
+
+    const { currentUser } = firebase.auth();
+
+    firebase.database().ref(`/users/${currentUser.uid}/transactions`).orderByChild('date').on('value', (snapshot => {
       const tempTransactions = [];
 
       var prevDate = "";
@@ -63,15 +66,16 @@ export class TransactionProvider {
 
   updateTransaction(key: String, transaction: any) {
     var update = {};
-    update['/user/transactions/'+ key] = transaction;
+    const { currentUser } = firebase.auth();
+    update[`/users/${currentUser.uid}/transactions/`+ key] = transaction;
 
     return firebase.database().ref().update(update)
   }
 
   deleteTransaction(key: String) {
-    console.log('key', key);
     var update = {};
-    update['/user/transactions/'+ key] = null;
+    const { currentUser } = firebase.auth();
+    update[`/users/${currentUser.uid}/transactions/`+ key] = null;
 
     return firebase.database().ref().update(update)
   }

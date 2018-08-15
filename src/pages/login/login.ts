@@ -5,6 +5,8 @@ import firebase from 'firebase';
 import { CreateAccountPage } from '../create-account/create-account';
 import { AddTransactionPage } from '../add-transaction/add-transaction';
 import { ViewTransactionsPage } from '../view-transactions/view-transactions';
+
+import { CategoryProvider, TransactionProvider } from '../../providers';
 /**
  * Generated class for the LoginPage page.
  *
@@ -28,7 +30,7 @@ export class LoginPage {
     password: 'password' 
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController, public categoryService: CategoryProvider, public transactionService: TransactionProvider) {
     this.loggingIn = false;    
   }
 
@@ -46,6 +48,10 @@ export class LoginPage {
     this.errorMessage = '';
     firebase.auth().signInWithEmailAndPassword(this.account.email, this.account.password)
       .then(() => {
+        // Initialize the providers by subscribing to them
+        this.transactionService.transactionUpdatesByDate().subscribe();
+        this.categoryService.getCategories().subscribe();
+        
         this.navCtrl.setRoot(ViewTransactionsPage);
         this.loggingIn = false;
       }).catch((error) => {

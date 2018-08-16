@@ -46,12 +46,17 @@ export class MyApp {
     this.pages = [
       { title: 'Transactions', component: ViewTransactionsPage },
       { title: 'Categories', component: SelectCategoryPage },
-      { title: 'Analytics', component: AnalyticsPage }
+      { title: 'Analytics', component: AnalyticsPage },
+      { title: 'Logout', component: LoginPage}
     
     ]
   }
 
   openPage(page) {
+    if(page.title === 'Logout') {
+      firebase.auth().signOut()
+        .catch((err) => {console.log('Error signing out', err)})
+    }
     this.nav.setRoot(page.component);
   }
 

@@ -1,9 +1,25 @@
 {
-  "american football": "american-football",
-  "briefcase": "briefcase",
-  "brush": "brush",
-  "build": "build",
-  "bus": "bus",
-  "cafe": "cafe",
-  "flask": "flask"
+  "icons": [
+    "american-football",
+    "briefcase",
+    "brush",
+    "build",
+    "bus",
+    "cafe",
+    "flask",
+    "analytics",
+    "attach",
+    "ios-basket",
+    "md-beer",
+    "bicycle",
+    "md-boat",
+    "ios-book",
+    "ios-cafe",
+    "md-car",
+    "ios-camera",
+    "md-cart",
+    "clipboard",
+    "cloudy-night",
+    "compass"
+  ]
 }

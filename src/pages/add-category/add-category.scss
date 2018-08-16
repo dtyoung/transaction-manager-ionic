@@ -1,15 +1,29 @@
 page-add-category {
-  // .icontent {
+  .category-icon {
+    font-size: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right:-50%;
+    transform: translate(-50%, -50%) 
+  }
 
-  //   .scroll-content {
-  //     justify-content: center;
-  //     display: flex;
-  //     //align-items: center;
-  //   }
+  .ilist {
+    text-align: center;
+  }
 
-  //   .ilist {
-  //       width: 30%;
-  //       min-width: 270px;
-  //   }
-// }
+  .circle {
+    border-radius: 50%;
+    background-color: #D3D3D3;
+    width: 120px;
+    height: 120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .container {
+    position: relative;
+  }
+
 }
+  

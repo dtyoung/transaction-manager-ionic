@@ -14,10 +14,12 @@
 
 
 <ion-content class="icontent" padding>
-  <ion-list class="ilist">
+  <ion-list class="ilist" text-center>
+    <div class="circle container" >
+      <ion-icon class="category-icon" name={{icon}} (click)="selectCategoryIcon()"></ion-icon>
+    </div>
     <ion-item>
-      <ion-icon name={{icon}} item-start (click)="selectCategoryIcon()"></ion-icon>
-      <ion-input type="text" placeholder="Category Name" [(ngModel)]="name"></ion-input>
+      <ion-input type="text" placeholder="Category Name" [(ngModel)]="name" ></ion-input>
     </ion-item>
 
     <ion-item>

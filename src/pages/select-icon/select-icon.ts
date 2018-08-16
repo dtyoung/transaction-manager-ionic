@@ -20,10 +20,8 @@ export class SelectIconPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider) {
     this.categoryService.loadIcons().subscribe(data => {
-      for(const icon of Object.keys(data)) {
-        this.icons.push(data[icon]);
-      }
-    });  
+      this.icons = data.icons;
+    }); 
   }
 
   selectIcon(icon: String){

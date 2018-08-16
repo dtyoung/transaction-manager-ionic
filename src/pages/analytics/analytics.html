@@ -41,14 +41,15 @@
   <!-- Pie Chart -->
   <ion-card>
     <ion-card-header>
-      Donut Chart
+      Categories By Total
     </ion-card-header>
     <ion-card-content>
+      <p *ngIf="totalsByCategoryGraph.length === 0">There are no transactions between the specified dates</p>
       <canvas #doughnutCanvas></canvas>
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="totalsByCategory.length !== 0">
     <ion-list>
       <ion-item *ngFor="let category of totalsByCategory">
         <ion-row>

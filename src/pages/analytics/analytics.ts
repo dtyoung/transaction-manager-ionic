@@ -25,9 +25,9 @@ export class AnalyticsPage {
   pieChart;
 
   transactions: any
-  transactionsByCategory;
-  totalsByCategoryGraph: { category: string, total: Number, icon: String }[];
-  totalsByCategory: { category: string, total: Number, icon: String }[];
+  transactionsByCategory = [];
+  totalsByCategoryGraph: { category: string, total: Number, icon: String }[] = [];
+  totalsByCategory: { category: string, total: Number, icon: String }[] = [];
   categories;
   constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider, public categoryService: CategoryProvider) { 
     this.endDate = moment().format('YYYY-MM-DD');
@@ -42,7 +42,7 @@ export class AnalyticsPage {
     const labels = this.totalsByCategoryGraph.map((transaction) => transaction.category);
     const data = this.totalsByCategoryGraph.map((transaction) => transaction.total);
     this.pieChart = new Chart(this.doughnutCanvas.nativeElement, {
- 
+
       type: 'doughnut',
       data: {
           labels: labels,

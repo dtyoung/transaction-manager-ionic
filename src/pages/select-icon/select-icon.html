@@ -16,7 +16,7 @@
 <ion-content padding>
   <ion-grid>
     <ion-row class="larger">
-      <ion-col (click)="selectIcon(icon)" *ngFor="let icon of icons" text-center>
+      <ion-col col-4 (click)="selectIcon(icon)" *ngFor="let icon of icons" text-center>
         <ion-icon name={{icon}} ></ion-icon>
       </ion-col>
     </ion-row>

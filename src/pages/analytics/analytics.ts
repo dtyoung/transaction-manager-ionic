@@ -79,8 +79,9 @@ export class AnalyticsPage {
     // Show 'Other Categories in graph'
     if(this.totalsByCategory.length > 4) {
       const extraCategories = this.totalsByCategory.slice(4);
-      const totalOfExtraCategories = extraCategories.map(this.getTotal).reduce(this.sumTotal);
+      const totalOfExtraCategories = Math.round(extraCategories.map(this.getTotal).reduce(this.sumTotal) * 100) / 100;
       this.totalsByCategoryGraph = this.totalsByCategory.slice(0, 4)
+      
       this.totalsByCategoryGraph.push({ category: 'Other Categories', total: totalOfExtraCategories, icon: '' })
     } else {
       this.totalsByCategoryGraph = this.totalsByCategory; 

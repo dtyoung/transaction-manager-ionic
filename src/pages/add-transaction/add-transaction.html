@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
   <ion-list>
     <ion-item>
@@ -40,7 +40,7 @@
       <ion-input type="text" placeholder="notes" [(ngModel)]="notes"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item id="item-button">
       <button ion-button color="primary" block (click)="submitTransaction()">
         Add Transaction
       </button>

@@ -16,10 +16,10 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-list>
     <ion-item>
-      <ion-label>Start Date</ion-label>
+      <ion-label id="datetime-label">Start Date</ion-label>
       <ion-datetime 
         displayFormat="DD/MM/YYYY" 
         [(ngModel)]="startDate" 
@@ -28,7 +28,7 @@
       </ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label>End Date</ion-label>
+      <ion-label id="datetime-label">End Date</ion-label>
       <ion-datetime
         displayFormat="DD/MM/YYYY"
         [(ngModel)]="endDate"
@@ -41,7 +41,7 @@
   <!-- Pie Chart -->
   <ion-card>
     <ion-card-header>
-      Categories By Total
+      Totals By Category
     </ion-card-header>
     <ion-card-content>
       <p *ngIf="totalsByCategoryGraph.length === 0">There are no transactions between the specified dates</p>
@@ -50,6 +50,16 @@
   </ion-card>
 
   <ion-card *ngIf="totalsByCategory.length !== 0">
+    <ion-card-header>
+      <ion-row>
+        <ion-col col-9>
+          Category
+        </ion-col>
+        <ion-col col-3>
+            Total
+          </ion-col>
+      </ion-row>
+    </ion-card-header>
     <ion-list>
       <ion-item *ngFor="let category of totalsByCategory">
         <ion-row>

@@ -14,3 +14,39 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+$color-primary: #74d419;
+$color-background-light: #EBF7E3;
+$color-background-dark: #9BD770;
+$color-highlight: #215000;
+$color-secondary: #25470c;
+$color-background: #EEEEEE;
+$color-button: #6dc718;
+
+.toolbar-background {
+    background-color: $color-primary;
+}
+
+.content {
+    background-color: $color-background;
+}
+
+.card {
+    margin-bottom: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    width: 100%;
+}
+
+.button {
+    background-color: $color-button;
+}
+
+.toolbar-title {
+    color: $color-highlight;
+}
+
+.fab {
+    background-color: $color-primary;
+}

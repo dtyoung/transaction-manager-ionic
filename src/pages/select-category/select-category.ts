@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { CategoryProvider } from '../../providers/category/category';
 import { AddCategoryPage } from '../../pages/add-category/add-category';
-
+import { Category } from '../../types/types';
 /**
  * Generated class for the SelectCategoryPage page.
  *
@@ -19,7 +19,7 @@ import { AddCategoryPage } from '../../pages/add-category/add-category';
 export class SelectCategoryPage {
 
   canSelect: Boolean = false;
-  categories: Object[] = [];
+  categories: Category[] = [];
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider) { 
   }
@@ -31,10 +31,10 @@ export class SelectCategoryPage {
     this.canSelect = this.navParams.get('canSelect');
   }
 
-  selectCategory(category: Object[]) {
+  selectCategory(category: Category) {
     if(this.canSelect) {
     this.navCtrl.getPrevious().data.category = category;
-    this.navCtrl.pop();
+    this.navCtrl.pop({});
     }
   }
 

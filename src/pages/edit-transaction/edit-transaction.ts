@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SelectCategoryPage } from '../../pages';
-import { TransactionProvider } from '../../providers';
-
+import { TransactionProvider, CategoryProvider } from '../../providers';
+import { Category, Transaction } from '../../types/types';
 /**
  * Generated class for the EditTransactionPage page.
  *
@@ -17,61 +17,54 @@ import { TransactionProvider } from '../../providers';
 })
 export class EditTransactionPage {
 
-  category: { name: String, icon: String };
+  category: Category;
 
-  transaction: {
-    id: String,
-    category: String,
-    date: String,
-    icon: String,
-    notes: String,
-    value: String
-  } = {
-    id: '',
-    category: '',
+  transaction: Transaction = {
+    transactionId: '',
+    value: null,
     date: '',
-    icon: '',
-    notes: '',
-    value: ''
-  }
+    categoryId: '',
+    notes: ''
+  };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider, public categoryService: CategoryProvider) {
     
   }
 
   ionViewDidLoad() {
     this.transaction = this.navParams.get('transaction');
+    this.category = this.categoryService.getCategoryFromId(this.transaction.categoryId);
   }
 
   ionViewWillEnter() {
     const category = this.navParams.get('category') || null;
     if (category) {
-      this.transaction.category = category.name;
-      this.transaction.icon = category.icon;
+      this.category = category;
     }
   }
 
   selectCategory() {
-    this.navCtrl.push(SelectCategoryPage, { "parentPage": this });
+    this.navCtrl.push(SelectCategoryPage, { "parentPage": this, canSelect: true });
   }
 
   getCategoryText(): String {
-    return this.transaction.category ? this.transaction.category : 'Select Category';
+    return this.category ? this.category.name : 'Select Category';
   }
 
   getCategoryIcon(): String {
-    return this.transaction.icon ? this.transaction.icon : 'md-help';
+    return this.category ? this.category.icon : this.categoryService.getDefaultCategoryIcon();
   }
 
   saveTransaction() {
-    const update = { 
-      category: this.transaction.category,
+    const update: Transaction = {
+      transactionId: this.transaction.transactionId,
+      categoryId: this.category.key,
       date: this.transaction.date,
-      icon: this.transaction.icon,
       notes: this.transaction.notes,
       value: this.transaction.value
     };
-    this.transactionService.updateTransaction(this.transaction.id, update);
+    this.transactionService.updateTransaction(this.transaction.transactionId, update);
+    this.navCtrl.getPrevious().data.transaction = update;
     this.navCtrl.pop();
   }
 

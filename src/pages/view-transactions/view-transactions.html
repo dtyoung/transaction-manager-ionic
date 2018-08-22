@@ -30,10 +30,10 @@
       <ion-item *ngFor="let transaction of date" (click)="moreDetailTransaction(transaction)">
         <ion-row>
           <ion-col col-1>
-            <ion-icon name={{transaction.icon}}></ion-icon>
+            <ion-icon name={{getIconFromCategoryId(transaction.categoryId)}}></ion-icon>
           </ion-col>
           <ion-col col-8>
-            {{transaction.category}}
+            {{getNameFromCategoryId(transaction.categoryId)}}
           </ion-col>
           <ion-col col-3>
             ${{transaction.value}}

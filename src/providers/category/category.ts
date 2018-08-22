@@ -5,6 +5,8 @@ import firebase from 'firebase';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import { Observable } from 'rxjs/Observable';
+import { Category } from '../../types/types';
+
 /*
   Generated class for the CategoryProvider provider.
 
@@ -14,8 +16,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class CategoryProvider {
 
-  private categories: { name: String, icon: String}[];
-  private categoriesObservable: Observable<Object[]>;
+  private categories: Category[];
+  private categoriesObservable: Observable<Category[]>;
   private categoriesObserver;
 
   constructor(public http: Http) {
@@ -25,7 +27,7 @@ export class CategoryProvider {
     })
   }
 
-  getCategories(): Observable<Object[]> {
+  getCategories(): Observable<Category[]> {
     return this.categoriesObservable;
   }
 
@@ -36,7 +38,8 @@ export class CategoryProvider {
       snapshot.forEach(childSnapshot => {
         var key = childSnapshot.key;
         var childData = childSnapshot.val();
-        const category = { 
+        const category: Category = {
+          key: key,
           icon: childData.icon,
           name: childData.name
         }
@@ -75,5 +78,47 @@ export class CategoryProvider {
     database.ref(`/users/${currentUser.uid}/categories`).push({
       name, icon
     });
+  }
+
+  getCategoryFromId(id: String): Category {
+    if(!this.categories || !id) {
+      return undefined;
+    }
+
+    const found = this.categories.find((element) => {
+      return id === element.key;
+    })
+
+    return found;
+  }
+
+  getIconFromCategoryId(id: String): String {
+
+    if(!this.categories || !id) {
+      return this.getDefaultCategoryIcon();
+    }
+
+    const found = this.categories.find((element) => {
+      return id === element.key;
+    })
+
+    if(found) {return found.icon}
+    
+    return this.getDefaultCategoryIcon();
+
+  }
+
+  getNameFromCategoryId(id: String): String {
+    if(!this.categories || !id) {
+      return this.getDefaultCategoryName();
+    }
+
+    const found = this.categories.find((element) => {
+      return id === element.key;
+    })
+
+    if(found) { return found.name };
+
+    return this.getDefaultCategoryName();
   }
 }

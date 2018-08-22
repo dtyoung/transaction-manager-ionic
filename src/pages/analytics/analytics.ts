@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { TransactionProvider, CategoryProvider } from '../../providers';
+import { Transaction } from '../../types/types';
 
 var moment = require('moment');
 var group = require('group-reduce');
@@ -24,9 +25,9 @@ export class AnalyticsPage {
   endDate: String;
   pieChart;
 
-  transactions: any
-  transactionsByCategory = [];
-  totalsByCategoryGraph: { category: string, total: Number, icon: String }[] = [];
+  transactions: Transaction[][]
+  transactionsByCategory: Transaction[][] = [];
+  totalsByCategoryGraph = [];
   totalsByCategory: { category: string, total: Number, icon: String }[] = [];
   categories;
   constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider, public categoryService: CategoryProvider) { 
@@ -40,6 +41,7 @@ export class AnalyticsPage {
     this.setTransactionData();
 
     const labels = this.totalsByCategoryGraph.map((transaction) => transaction.category);
+    console.log('labels', labels)
     const data = this.totalsByCategoryGraph.map((transaction) => transaction.total);
     this.pieChart = new Chart(this.doughnutCanvas.nativeElement, {
 
@@ -66,6 +68,7 @@ export class AnalyticsPage {
     this.setTransactionData();
 
     const labels = this.totalsByCategoryGraph.map((transaction) => transaction.category);
+    console.log('labels', labels)
     const data = this.totalsByCategoryGraph.map((transaction) => transaction.total);
     
     this.pieChart.data.datasets[0].data = data;
@@ -100,20 +103,24 @@ export class AnalyticsPage {
     });
 
 
-    // Create an array mapping the category to total amount spent
+    // Create an array mapping from the category to total amount spent
     const flatTransactions = ([].concat.apply([], this.transactionsByCategory))
 
-    const totalsByCategory = group(flatTransactions).by('category')
+    console.log('flat transactoins' ,flatTransactions)
+
+    const totalsByCategory = group(flatTransactions).by('categoryId')
     .reduce((category, entries) => {
+      console.log('category', category)
       return {
-        category: category,
+        category: this.categoryService.getNameFromCategoryId(category),
         total: entries.map(this.getValue).reduce(this.sumTotal),
-        icon: this.categoryService.getIconFromCategoryName(category)
+        icon: this.categoryService.getIconFromCategoryId(category)
       }
     })
 
     totalsByCategory.sort( (a, b) => {return b.total - a.total});
 
+    console.log(totalsByCategory)
     return totalsByCategory;
   }
 

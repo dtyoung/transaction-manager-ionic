@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
-import { CategoryProvider } from '../../providers/category/category';
+import { CategoryProvider } from '../../providers';
 import { EditTransactionPage, TransactionPopoverPage } from '../../pages';
+import { Transaction } from '../../types/types';
 /**
  * Generated class for the TransactionDetailPage page.
  *
@@ -16,32 +17,26 @@ import { EditTransactionPage, TransactionPopoverPage } from '../../pages';
 })
 export class TransactionDetailPage {
 
-  transaction: {
-    id: String,
-    category: String,
-    date: String,
-    icon: String,
-    notes: String,
-    value: String
-  };
+  transaction: Transaction
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider, private popoverCtrl: PopoverController) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+    console.log(this.navParams.get('transaction'))
     this.transaction = this.navParams.get('transaction');
   }
 
-  getValue(): String {
-    return this.transaction ? this.transaction.value : '';
+  getValue(): Number {
+    return this.transaction ? this.transaction.value : null;
   }
 
   getCategoryIcon(): String {
-    return this.transaction ? this.transaction.icon : this.categoryService.getDefaultCategoryIcon();
+    return this.transaction ? this.categoryService.getIconFromCategoryId(this.transaction.categoryId) : '';
   }
 
   getCategoryText(): String {
-    return this.transaction ? this.transaction.category : '';
+    return this.transaction ? this.categoryService.getNameFromCategoryId(this.transaction.categoryId) : '';
   }
 
   getDate(): String {
@@ -57,7 +52,7 @@ export class TransactionDetailPage {
 
   editTransaction() {
     const transaction = this.transaction;
-    this.navCtrl.push(EditTransactionPage, { transaction })
+    this.navCtrl.push(EditTransactionPage, { "parentPage": this, transaction })
   }
 
   presentPopover(ev) {

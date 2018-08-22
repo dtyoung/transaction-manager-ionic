@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { SelectCategoryPage } from '../../pages';
 import { CategoryProvider, TransactionProvider } from '../../providers';
+import { Category, Transaction } from '../../types/types';
 /**
  * Generated class for the AddTransactionPage page.
  *
@@ -17,7 +18,7 @@ import { CategoryProvider, TransactionProvider } from '../../providers';
 })
 export class AddTransactionPage {
 
-  category: { name: String, icon: String } = null;
+  category: Category = null;
   value: Number = 0.00;
   date: String = new Date().toISOString().substring(0, 10);
   notes: String = '';
@@ -46,9 +47,15 @@ export class AddTransactionPage {
   }
 
   submitTransaction() {
-    const categoryName = this.category ? this.category.name : this.categories.getDefaultCategoryName();
-    const icon = this.category ? this.category.icon : this.categories.getDefaultCategoryIcon();
-    this.transactions.addTransaction(this.value, categoryName, this.date, this.notes, icon)
+    const categoryId = this.category ? this.category.key : null;
+
+    const transaction: Transaction = {
+      value: this.value,
+      categoryId: categoryId,
+      date: this.date,
+      notes: this.notes 
+    }
+    this.transactions.addTransaction(transaction)
     this.navCtrl.pop();
   }
 }

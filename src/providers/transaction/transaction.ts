@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { Transaction } from '../../types/types';
 
 var moment = require('moment');
 
@@ -15,8 +16,8 @@ var moment = require('moment');
 @Injectable()
 export class TransactionProvider {
 
-  private transactions: Object[][];
-  private transactionsObservable: Observable<Object[][]>;
+  private transactions: Transaction[][];
+  private transactionsObservable: Observable<Transaction[][]>;
   private transactionsObserver;
 
   constructor() {
@@ -26,15 +27,13 @@ export class TransactionProvider {
     })
   }
 
-  addTransaction(value: Number, category: String, date: String, notes: String, icon: String) {
+  addTransaction(transaction: Transaction) {
     const { currentUser } = firebase.auth();
     const database = firebase.database();
-    database.ref(`/users/${currentUser.uid}/transactions`).push({
-      value, category, date, notes, icon
-    });
+    database.ref(`/users/${currentUser.uid}/transactions`).push(transaction);
   }
 
-  transactionUpdatesByDate(): Observable<Object[][]> {
+  transactionUpdatesByDate(): Observable<Transaction[][]> {
     return this.transactionsObservable;
   }
 
@@ -50,8 +49,8 @@ export class TransactionProvider {
         var key = childSnapshot.key;
         
         var childData = childSnapshot.val();
-        childData.id = key;
-        const transaction = childData;
+        const transaction: Transaction = childData;
+        transaction.transactionId = key;
 
         if (childData.date !== prevDate) {
           prevDate = childData.date;
@@ -64,10 +63,16 @@ export class TransactionProvider {
     }));
   }
 
-  updateTransaction(key: String, transaction: any) {
+  updateTransaction(key: String, transaction: Transaction) {
     var update = {};
     const { currentUser } = firebase.auth();
-    update[`/users/${currentUser.uid}/transactions/`+ key] = transaction;
+    const transactionUpdate = {
+      categoryId: transaction.categoryId,
+      date: transaction.date,
+      notes: transaction.notes,
+      value: transaction.value
+    }
+    update[`/users/${currentUser.uid}/transactions/`+ key] = transactionUpdate;
 
     return firebase.database().ref().update(update)
   }

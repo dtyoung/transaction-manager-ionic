@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { TransactionProvider } from '../../providers/transaction/transaction';
+import { TransactionProvider, CategoryProvider } from '../../providers';
 import { AddTransactionPage, TransactionDetailPage } from '../../pages';
+import { Transaction } from '../../types/types';
 var moment = require('moment')
 
 /**
@@ -18,8 +19,8 @@ var moment = require('moment')
 })
 export class ViewTransactionsPage {
 
-  transactions: Object[][] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider) {
+  transactions: Transaction[][] = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider, public categoryService: CategoryProvider) {
   }
 
   ionViewDidLoad() {
@@ -30,11 +31,20 @@ export class ViewTransactionsPage {
     this.navCtrl.push(AddTransactionPage);
   }
 
-  moreDetailTransaction(transaction: Object) {
+  moreDetailTransaction(transaction: Transaction) {
     this.navCtrl.push(TransactionDetailPage, { transaction })
   }
 
   formatDate(date: String): String {
     return moment(date, 'YYYY-MM-DD').format('dddd Do MMMM');
   }
+
+  getIconFromCategoryId(id: String): String {
+    return this.categoryService.getIconFromCategoryId(id);
+  }
+
+  getNameFromCategoryId(id: String): String {
+    return this.categoryService.getNameFromCategoryId(id);
+  }
+
 }

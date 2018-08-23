@@ -4,7 +4,7 @@ import { EditTransactionPage } from '../../pages';
 import { TransactionProvider } from '../../providers';
 import { Category, Transaction } from '../../types/types';
 /**
- * Generated class for the TransactionPopoverPage page.
+ * Generated class for the EditDeletePopoverPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,8 +12,8 @@ import { Category, Transaction } from '../../types/types';
 
 @IonicPage()
 @Component({
-  selector: 'page-transaction-popover',
-  templateUrl: 'transaction-popover.html',
+  selector: 'page-edit-delete-popover',
+  templateUrl: 'edit-delete-popover.html',
 })
 
 /**
@@ -23,7 +23,7 @@ import { Category, Transaction } from '../../types/types';
  * deleteHandler - a function that is used to delete the data
  * deleteSubtitle - the message to be displayed when deleting the data
  */
-export class TransactionPopoverPage {
+export class EditDeletePopoverPage {
 
   data: Transaction | Category;
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
-import { CategoryProvider } from '../../providers';
-import { EditTransactionPage, TransactionPopoverPage } from '../../pages';
+import { CategoryProvider, TransactionProvider } from '../../providers';
+import { EditTransactionPage, EditDeletePopoverPage } from '../../pages';
 import { Transaction } from '../../types/types';
 /**
  * Generated class for the TransactionDetailPage page.
@@ -19,7 +19,12 @@ export class TransactionDetailPage {
 
   transaction: Transaction
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public categoryService: CategoryProvider, private popoverCtrl: PopoverController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public categoryService: CategoryProvider, 
+    public transactionService: TransactionProvider,
+    private popoverCtrl: PopoverController) {
   }
 
   ionViewWillEnter() {
@@ -50,14 +55,14 @@ export class TransactionDetailPage {
     return '';
   }
 
-  editTransaction() {
-    const transaction = this.transaction;
-    this.navCtrl.push(EditTransactionPage, { "parentPage": this, transaction })
-  }
-
   presentPopover(ev) {
     const transaction = this.transaction;
-    let popover = this.popoverCtrl.create(TransactionPopoverPage, {transaction});
+    let popover = this.popoverCtrl.create(EditDeletePopoverPage, {
+      data: transaction,
+      editPage: EditTransactionPage,
+      deleteHandler: this.transactionService.deleteTransaction,
+      deleteSubtitle: 'Are you sure you want to delete this transaction?'
+    });
     
     popover.present({ ev: ev });
   }

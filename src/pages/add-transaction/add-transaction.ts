@@ -53,7 +53,8 @@ export class AddTransactionPage {
       value: this.value,
       categoryId: categoryId,
       date: this.date,
-      notes: this.notes 
+      notes: this.notes,
+      transactionId: null
     }
     this.transactions.addTransaction(transaction)
     this.navCtrl.pop();

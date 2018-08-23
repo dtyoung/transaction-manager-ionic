@@ -22,7 +22,7 @@ import {
   TransactionDetailPage,
   AnalyticsPage,
   EditTransactionPage,
-  TransactionPopoverPage
+  EditDeletePopoverPage
 } from '../pages';
 
 @NgModule({
@@ -38,7 +38,7 @@ import {
     TransactionDetailPage,
     AnalyticsPage,
     EditTransactionPage,
-    TransactionPopoverPage
+    EditDeletePopoverPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +58,7 @@ import {
     TransactionDetailPage,
     AnalyticsPage,
     EditTransactionPage,
-    TransactionPopoverPage
+    EditDeletePopoverPage
   ],
   providers: [
     StatusBar,

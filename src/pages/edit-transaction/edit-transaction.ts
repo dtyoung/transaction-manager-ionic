@@ -32,7 +32,7 @@ export class EditTransactionPage {
   }
 
   ionViewDidLoad() {
-    this.transaction = this.navParams.get('transaction');
+    this.transaction = this.navParams.get('data');
     this.category = this.categoryService.getCategoryFromId(this.transaction.categoryId);
   }
 

@@ -5,8 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { Transaction } from '../../types/types';
 
-var moment = require('moment');
-
 /*
   Generated class for the TransactionProvider provider.
 
@@ -29,8 +27,13 @@ export class TransactionProvider {
 
   addTransaction(transaction: Transaction) {
     const { currentUser } = firebase.auth();
-    const database = firebase.database();
-    database.ref(`/users/${currentUser.uid}/transactions`).push(transaction);
+    const transactionToAdd = {
+      value: transaction.value,
+      notes: transaction.notes,
+      date: transaction.date,
+      categoryId: transaction.categoryId
+    }
+    firebase.database().ref(`/users/${currentUser.uid}/transactions`).push(transactionToAdd);
   }
 
   transactionUpdatesByDate(): Observable<Transaction[][]> {
@@ -77,10 +80,10 @@ export class TransactionProvider {
     return firebase.database().ref().update(update)
   }
 
-  deleteTransaction(key: String) {
+  deleteTransaction(transaction: Transaction) {
     var update = {};
     const { currentUser } = firebase.auth();
-    update[`/users/${currentUser.uid}/transactions/`+ key] = null;
+    update[`/users/${currentUser.uid}/transactions/`+ transaction.transactionId] = null;
 
     return firebase.database().ref().update(update)
   }

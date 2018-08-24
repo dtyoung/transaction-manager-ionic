@@ -1,0 +1,32 @@
+<!--
+  Generated template for the EditCategoryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Edit Category</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="icontent">
+  <ion-list class="ilist" text-center>
+    <div class="circle container" >
+      <ion-icon class="category-icon" name={{category.icon}} (click)="selectCategoryIcon()"></ion-icon>
+    </div>
+    <ion-item>
+      <ion-input type="text" placeholder="Category Name" [(ngModel)]="category.name" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button color="primary" block (click)="updateCategory()">
+        Update Category
+      </button>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>

@@ -63,7 +63,7 @@ export class EditTransactionPage {
       notes: this.transaction.notes,
       value: this.transaction.value
     };
-    this.transactionService.updateTransaction(this.transaction.transactionId, update);
+    this.transactionService.updateTransaction(update);
     this.navCtrl.getPrevious().data.transaction = update;
     this.navCtrl.pop();
   }

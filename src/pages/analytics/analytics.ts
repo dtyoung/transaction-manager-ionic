@@ -41,7 +41,6 @@ export class AnalyticsPage {
     this.setTransactionData();
 
     const labels = this.totalsByCategoryGraph.map((transaction) => transaction.category);
-    console.log('labels', labels)
     const data = this.totalsByCategoryGraph.map((transaction) => transaction.total);
     this.pieChart = new Chart(this.doughnutCanvas.nativeElement, {
 
@@ -68,7 +67,6 @@ export class AnalyticsPage {
     this.setTransactionData();
 
     const labels = this.totalsByCategoryGraph.map((transaction) => transaction.category);
-    console.log('labels', labels)
     const data = this.totalsByCategoryGraph.map((transaction) => transaction.total);
     
     this.pieChart.data.datasets[0].data = data;
@@ -105,12 +103,8 @@ export class AnalyticsPage {
 
     // Create an array mapping from the category to total amount spent
     const flatTransactions = ([].concat.apply([], this.transactionsByCategory))
-
-    console.log('flat transactoins' ,flatTransactions)
-
     const totalsByCategory = group(flatTransactions).by('categoryId')
     .reduce((category, entries) => {
-      console.log('category', category)
       return {
         category: this.categoryService.getNameFromCategoryId(category),
         total: entries.map(this.getValue).reduce(this.sumTotal),
@@ -120,7 +114,7 @@ export class AnalyticsPage {
 
     totalsByCategory.sort( (a, b) => {return b.total - a.total});
 
-    console.log(totalsByCategory)
+  (totalsByCategory)
     return totalsByCategory;
   }
 

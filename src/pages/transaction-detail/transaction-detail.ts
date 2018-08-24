@@ -28,7 +28,6 @@ export class TransactionDetailPage {
   }
 
   ionViewWillEnter() {
-    console.log(this.navParams.get('transaction'))
     this.transaction = this.navParams.get('transaction');
   }
 

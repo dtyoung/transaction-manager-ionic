@@ -22,7 +22,9 @@ import {
   TransactionDetailPage,
   AnalyticsPage,
   EditTransactionPage,
-  EditDeletePopoverPage
+  EditDeletePopoverPage,
+  CategoryDetailPage,
+  EditCategoryPage
 } from '../pages';
 
 @NgModule({
@@ -38,7 +40,9 @@ import {
     TransactionDetailPage,
     AnalyticsPage,
     EditTransactionPage,
-    EditDeletePopoverPage
+    EditDeletePopoverPage,
+    CategoryDetailPage,
+    EditCategoryPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +62,9 @@ import {
     TransactionDetailPage,
     AnalyticsPage,
     EditTransactionPage,
-    EditDeletePopoverPage
+    EditDeletePopoverPage,
+    CategoryDetailPage,
+    EditCategoryPage
   ],
   providers: [
     StatusBar,

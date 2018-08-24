@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { CategoryProvider } from '../../providers/category/category';
-import { AddCategoryPage } from '../../pages/add-category/add-category';
+import { AddCategoryPage, CategoryDetailPage } from '../';
 import { Category } from '../../types/types';
 /**
  * Generated class for the SelectCategoryPage page.
@@ -35,6 +35,8 @@ export class SelectCategoryPage {
     if(this.canSelect) {
     this.navCtrl.getPrevious().data.category = category;
     this.navCtrl.pop({});
+    } else {
+      this.navCtrl.push(CategoryDetailPage, { category })
     }
   }
 

@@ -121,4 +121,24 @@ export class CategoryProvider {
 
     return this.getDefaultCategoryName();
   }
+
+  updateCategory(category: Category) {
+    var update = {};
+    const { currentUser } = firebase.auth();
+    const categoryUpdate = {
+      name: category.name,
+      icon: category.icon
+    };
+
+    update[`/users/${currentUser.uid}/transactions/`+ category.key] = categoryUpdate;
+    return firebase.database().ref().update(update);
+  }
+
+  deleteCategory(category: Category) {
+    var update = {};
+    const { currentUser } = firebase.auth();
+    update[`/users/${currentUser.uid}/categories/`+ category.key] = null;
+  
+    return firebase.database().ref().update(update)
+  }
 }

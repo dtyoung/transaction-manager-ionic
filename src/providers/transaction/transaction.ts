@@ -66,7 +66,7 @@ export class TransactionProvider {
     }));
   }
 
-  updateTransaction(key: String, transaction: Transaction) {
+  updateTransaction(transaction: Transaction) {
     var update = {};
     const { currentUser } = firebase.auth();
     const transactionUpdate = {
@@ -74,8 +74,8 @@ export class TransactionProvider {
       date: transaction.date,
       notes: transaction.notes,
       value: transaction.value
-    }
-    update[`/users/${currentUser.uid}/transactions/`+ key] = transactionUpdate;
+    };
+    update[`/users/${currentUser.uid}/transactions/`+ transaction.transactionId] = transactionUpdate;
 
     return firebase.database().ref().update(update)
   }

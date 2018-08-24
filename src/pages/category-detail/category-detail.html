@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Category</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="md-create"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="icontent">
+  <ion-list class="ilist" text-center>
+    <div class="circle container" >
+      <ion-icon class="category-icon" name={{category.icon}}></ion-icon>
+    </div>
+    <ion-item>
+      <ion-label class="category-name">{{category.name}}</ion-label>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>

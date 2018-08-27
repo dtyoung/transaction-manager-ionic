@@ -19,7 +19,7 @@ $color-primary: #74d419;
 $color-background-light: #EBF7E3;
 $color-background-dark: #9BD770;
 $color-highlight: #215000;
-$color-secondary: #25470c;
+$color-secondary: rgb(58, 134, 0);
 $color-background: #EEEEEE;
 $color-button: #6dc718;
 
@@ -50,3 +50,48 @@ $color-button: #6dc718;
 .fab {
     background-color: $color-primary;
 }
+
+#nav-menu-container {
+    color: white;
+}
+
+
+.menu-close {
+    border-bottom: 0px solid #dedede;
+}
+
+// .secondary-bar .item-inner {
+//     //.list-md .item-block .item-inner {
+//         // .list-md {
+//         // background-color: red;
+//         border-bottom: 0px solid #dedede !important;
+//         //background-color: red;
+//     // }
+// }
+
+.close-menu {
+    background-color: $color-secondary !important;
+    color: white;
+    font-weight: 700
+}
+
+.close-menu .item-inner {
+    border-bottom: 0px solid #dedede !important;
+}
+
+.secondary-bar  {
+    background-color: $color-background !important;
+}
+
+
+.nav-menu-title {
+    background-color: $color-primary;
+    margin: 0px;
+    padding: 20px 8px 20px 8px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+
+  

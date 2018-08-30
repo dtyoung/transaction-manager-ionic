@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content class="container" *ngIf="!dataLoading">
+<ion-content class="container" >
 
   <ion-fab bottom center class="ion-fab">
     <button ion-fab (click)="addTransaction()">+</button>
@@ -43,7 +43,7 @@
     </ion-list>
   </ion-card>
 
-  <p *ngIf="transactions.length === 0" class="transaction-notifier">You have no Transactions</p>
+  <p *ngIf="transactions.length === 0 && !dataLoading" class="transaction-notifier">You have no Transactions</p>
 </ion-content>
 
 <ion-content class="container" *ngIf="dataLoading">

@@ -25,6 +25,10 @@ export class TransactionProvider {
     })
   }
 
+  isInitializing(): Boolean {
+    return this.transactions === undefined;
+  }
+
   addTransaction(transaction: Transaction) {
     const { currentUser } = firebase.auth();
     const transactionToAdd = {

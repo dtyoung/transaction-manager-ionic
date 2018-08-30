@@ -19,12 +19,19 @@ var moment = require('moment')
 })
 export class ViewTransactionsPage {
 
+  dataLoading: Boolean = true;
+
   transactions: Transaction[][] = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public transactionService: TransactionProvider, public categoryService: CategoryProvider) {
   }
 
   ionViewDidLoad() {
-    this.transactionService.transactionUpdatesByDate().subscribe(data => this.transactions = data);
+    this.dataLoading = this.transactionService.isInitializing();
+    this.transactionService.transactionUpdatesByDate().subscribe(data => {
+      this.transactions = data;
+      this.dataLoading = false;
+      console.log('length', this.transactions.length);
+    });
   }
 
   addTransaction() {
